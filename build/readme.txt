@@ -18,7 +18,7 @@ public class Boostrap : ApplicationEventHandler
             SymmetricKey = "856FECBA3B06519C8DDDBC80BB080553",
             AccessTokenLifeTime = 20, // Minutes
             RefreshTokenStore = new UmbracoDbOAuthRefreshTokenStore(),
-            RefreshTokenLifeTime = 1440, // Minutes (10 days)
+            RefreshTokenLifeTime = 1440, // Minutes (1 day)
             TokenEndpoint = "/oauth/token",
             AllowedOrigin = "*"
         });

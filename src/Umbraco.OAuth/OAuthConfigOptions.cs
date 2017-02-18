@@ -22,7 +22,7 @@ namespace Umbraco.OAuth
             TokenEndpoint = "/oauth/token";
             AllowedOrigin = "*";
             AccessTokenLifeTime = 20; // 20 minutes
-            RefreshTokenLifeTime = 1440; // 10 days
+            RefreshTokenLifeTime = 1440; // 1 day
         }
 
         public IOAuthUserService UserService { get; set; }
