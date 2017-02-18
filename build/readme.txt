@@ -27,13 +27,13 @@ public class Boostrap : ApplicationEventHandler
 
 Out of all the config options, the only one that is required is the SymmetricKey. This MUST be a string of 32 characters length, BASE64 encoded. The rest of the options shown represent their defailt values, except RefreshTokenStore, which defaults to null (meaning don't use refresh tokens). The UserService paramater declares an IOAuthUserService instance used to validate user logins against. Out of the box there are 2 services defined, UmbracoMembersOAuthUserService and UmbracoUsersOAuthUserService, however you can define your own if you wish to use a custom user store. The RefreshTokenStore declares an IOAuthRefreshTokenStore instanced used to store refresh tokens. Out of the box there is one store defined, UmbracoDbOAuthRefreshTokenStore, which stores the tokens in the Umbraco database via a PetaPoco model. If you need to store the tokens in an alternative location you can implement the interface yourself and pass your instance into the config. If the RefreshTokenStore parameter is null, this will disable the refresh token feature and only standard username / password logins will be supported. The AccessTokenLifeTime and RefreshTokenLifeTime parameters declare the length in minutes that access token and refresh tokens should be valid for. Access tokens should be short lived, where as refresh tokens can last several days. TokenEndpoint defines the url of the oauth token end point. If you change this then be sure to update the umbracoReservedPaths app setting as well. AllowedOrigin defines the domain from which requests are allowed to come from. If you are building an app, you can set it to "*" to allow all origins, but if you are building a web based application, it is advised to set this to the domain of your app to prevent unpermitted access.
 
-With OAuth configured, you are now set to request OAuth token from the end point. To request a token, a post request should be made to /oauth2/token with a body containing the following key values:
+With OAuth configured, you are now set to request OAuth token from the end point. To request a token, a post request should be made to /oauth/token with a body containing the following key values:
 
 * grant_type = password
 * username = member user name
 * password = member password
 
-If a token expires, and a refresh token store is configured, you can request a refresh token by posting to /oauth2/token with a body containing the following key values:
+If a token expires, and a refresh token store is configured, you can request a refresh token by posting to /oauth/token with a body containing the following key values:
 
 * grant_type = refresh_token
 * refresh_token = the refresh token from the original token auth request
