@@ -11,5 +11,5 @@ There's also a nightly Nuget feed: `https://www.myget.org/F/umbraco-oauth/api/v2
 
 ## Configuration
 
-Please read and follow the configuration instructions displayed on post package install. At this point in time, configuration is a manual process, so please read the instructions carefully.
+Please read and follow the [configuration instructions](build/readme.txt) displayed on post package install. At this point in time, configuration is a manual process, so please read the instructions carefully.
 
