@@ -41,7 +41,7 @@ namespace Umbraco.OAuth
         {
             if (!_contexts.ContainsKey(realm))
             {
-                if (_contexts.TryAdd(realm, new OAuthContext(options)))
+                if (_contexts.TryAdd(realm, new OAuthContext(realm, options)))
                 {
                     GlobalConfiguration.Configuration.Routes.MapHttpRoute(
                         "OAuth_" + realm,

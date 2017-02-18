@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Net;
 using System.Security.Claims;
 using System.Web;
@@ -75,7 +76,10 @@ namespace Umbraco.OAuth.Web.Controllers
         {
             // Construct an identity
             var claims = Context.Services.UserService.GetUserClaims(username);
+
             var identity = new ClaimsIdentity(claims);
+            identity.AddClaim(new Claim(ClaimTypes.GroupSid, Context.Realm.GenerateHash()));
+
             var response = new OAuthTokenResponse
             {
                 access_token = Context.Services.TokenService.GenerateToken(identity, Context.Options.AccessTokenLifeTime),

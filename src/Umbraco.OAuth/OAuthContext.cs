@@ -4,12 +4,16 @@ namespace Umbraco.OAuth
 {
     public class OAuthContext
     {
+        public string Realm { get; private set; }
+
         public IOAuthOptions Options { get; private set; }
 
         public OAuthServicesContext Services { get; private set; }
 
-        public OAuthContext(OAuthOptions options)
+        public OAuthContext(string realm, OAuthOptions options)
         {
+            Realm = realm;
+
             // Store options
             Options = options;
 

@@ -30,6 +30,11 @@ namespace Umbraco.OAuth.Web
             if (!principal.Identity.IsAuthenticated)
                 return false;
 
+            // Make sure principal belongs to realm
+            var realm = principal.Claims.FirstOrDefault(x => x.Type == ClaimTypes.GroupSid)?.Value;
+            if (realm == null || realm != Realm)
+                return false;
+
             // Make sure username is present
             var username = principal.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Name)?.Value;
             if (string.IsNullOrWhiteSpace(username))

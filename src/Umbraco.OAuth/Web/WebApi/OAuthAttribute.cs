@@ -10,6 +10,13 @@ namespace Umbraco.OAuth.Web.WebApi
     {
         public bool AllowMultiple => false;
 
+        public OAuthAttribute()
+        { }
+
+        public OAuthAttribute(string realm)
+            : base(realm)
+        { }
+
         public async Task AuthenticateAsync(HttpAuthenticationContext context, CancellationToken cancellationToken)
         {
             var request = context.Request;

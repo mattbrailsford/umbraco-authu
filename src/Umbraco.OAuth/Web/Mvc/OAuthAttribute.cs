@@ -8,6 +8,13 @@ namespace Umbraco.OAuth.Web.Mvc
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method)]
     public class OAuthAttribute : BaseOAuthAttribute, IAuthenticationFilter
     {
+        public OAuthAttribute()
+        { }
+
+        public OAuthAttribute(string realm)
+            : base(realm)
+        { }
+
         public void OnAuthentication(AuthenticationContext filterContext)
         {
             var request = filterContext.HttpContext.Request; 
