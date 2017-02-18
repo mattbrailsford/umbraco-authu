@@ -6,7 +6,19 @@ namespace Umbraco.OAuth.Web
 {
     public class BaseOAuthAttribute : Attribute
     {
-        protected OAuthServicesContext Services => OAuthConfig.Instance.Services;
+        public string Realm { get; set; }
+
+        protected OAuthContext Context { get; }
+
+        public BaseOAuthAttribute()
+            : this(OAuth.DefaultRealm)
+        { }
+
+        public BaseOAuthAttribute(string realm)
+        {
+            Realm = realm;
+            Context = OAuth.GetContext(Realm);
+        }
 
         protected bool ValidatePrincipal(ClaimsPrincipal principal)
         {
@@ -24,7 +36,7 @@ namespace Umbraco.OAuth.Web
                 return false;
 
             // Make sure username is valid
-            if (!Services.UserService.ValidateUser(username))
+            if (!Context.Services.UserService.ValidateUser(username))
                 return false;
 
             return true;

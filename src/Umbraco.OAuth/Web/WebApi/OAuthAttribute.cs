@@ -8,8 +8,6 @@ namespace Umbraco.OAuth.Web.WebApi
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method)]
     public class OAuthAttribute : BaseOAuthAttribute, IAuthenticationFilter
     {
-        public string Realm { get; set; }
-
         public bool AllowMultiple => false;
 
         public async Task AuthenticateAsync(HttpAuthenticationContext context, CancellationToken cancellationToken)
@@ -22,7 +20,7 @@ namespace Umbraco.OAuth.Web.WebApi
                 return;
 
             // Extract the principal from the header
-            var principal = OAuthConfig.Instance.Services.TokenService.ReadToken(header.Parameter); //TODO: Check this validate
+            var principal = Context.Services.TokenService.ReadToken(header.Parameter); //TODO: Check this validate
             if (principal == null)
                 return;
 

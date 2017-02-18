@@ -8,8 +8,6 @@ namespace Umbraco.OAuth.Web.Mvc
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method)]
     public class OAuthAttribute : BaseOAuthAttribute, IAuthenticationFilter
     {
-        public string Realm { get; set; }
-
         public void OnAuthentication(AuthenticationContext filterContext)
         {
             var request = filterContext.HttpContext.Request; 
@@ -20,7 +18,7 @@ namespace Umbraco.OAuth.Web.Mvc
                 return;
             
             // Extract the principal from the header
-            var principal = OAuthConfig.Instance.Services.TokenService.ReadToken(header.Parameter); //TODO: Check this validate
+            var principal = Context.Services.TokenService.ReadToken(header.Parameter); //TODO: Check this validate
             if (principal == null)
                 return;
 

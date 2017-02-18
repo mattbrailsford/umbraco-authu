@@ -273,6 +273,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="OAuthContext.cs" />
     <Compile Include="Services\MembershipProviderOAuthUserService.cs" />
     <Compile Include="Web\BaseOAuthAttribute.cs" />
     <Compile Include="Web\Mvc\AddOAuthChallengeResult.cs" />
@@ -290,8 +291,8 @@
     <Compile Include="Models\OAuthTokenRequest.cs" />
     <Compile Include="Models\OAuthTokenResponse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="OAuthConfig.cs" />
-    <Compile Include="OAuthConfigOptions.cs" />
+    <Compile Include="OAuth.cs" />
+    <Compile Include="OAuthOptions.cs" />
     <Compile Include="OAuthServicesContext.cs" />
     <Compile Include="Web\Controllers\OAuthController.cs" />
     <Compile Include="Web\WebApi\AddOAuthChallengeResult.cs" />
