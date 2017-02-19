@@ -151,7 +151,7 @@ Example:
 
 ## Other Considerations
 
-Whilst Umbraco.OAuth does not enforce a https connection, it is stronly recommended that on your live environment you write a rewrite rule to enforce this for you. You should protected your oauth endpoint and your api controllers.
+Whilst Umbraco.OAuth does not enforce a https connection, it is stronly recommended that on your live environment you write a rewrite rule to block any non https traffic. You should protected your oauth endpoint and your api controllers.
 
     <rewrite>
       <rule name="Block non HTTPS traffic" stopProcessing="true">
