@@ -47,29 +47,29 @@ For a more advanced OAuth implementation, the following conifguration shows all 
 This will create an endpoint the same as the basic configuration with added support of refresh tokens and a client store.
 
 ### Configuration Options
-* ##### Realm : string 
-  _[optional, default:"default"]_
+* __Realm : string__   
+  _[optional, default:"default"]_  
   A uniqie alias for the configuration, allowing you to configure multiple endpoints.
-* ##### Path : string 
-  _[optional, default:"/oauth/token"]_
+* __Path : string__  
+  _[optional, default:"/oauth/token"]_  
   The path of the endpoint (__IMPORTANT!__ Be sure to add this to the `umbracoReservedPaths` app setting)
-* ##### UserService : IOAuthUserService 
-  _[optional, default:"new UmbracoMembersOAuthUserService()"]_
+* __UserService : IOAuthUserService__  
+  _[optional, default:"new UmbracoMembersOAuthUserService()"]_  
   The service from which to validate authentication requests against. Out of the box Umbraco.OAuth comes with 2 implementations, `UmbracoMembersOAuthUserService` and `UmbracoUsersOAuthUserService` with authenticate against the Umbraco members and users store respectively. Custom sources can be configured by implementing the `IOAuthUserService` interface yourself.
-* ##### SymmetricKey : string 
-  _[required]_
+* __SymmetricKey : string__  
+  _[required]_  
   A symetric key used to sign the generated access tokens. Must be a string 32 characters long, BASE64 encoded.
-* ##### AccessTokenLifeTime : int
-  _[optional, default:20]_
+* __AccessTokenLifeTime : int__  
+  _[optional, default:20]_  
   Sets the lifespan, in minutes, of an access token before re-authentication is required. Should be short lived.
-* ##### ClientStore : IOAuthClientStore
-  _[optional, default:null]_
+* __ClientStore : IOAuthClientStore__  
+  _[optional, default:null]_  
   Defines a store for OAuth client information. If not null, all authentication requests are required to pass valid client credentials in order for authentication to be successful. If null, client crendetials are not required to authenticate. Out of the box Umbraco.OAuth comes with 2 implementations, `InMemoryOAuthClientStore` which stores a fixed list of client credentials in memory and `UmbracoDbOAuthClientStore` which stores the client credentials in a custom database table in the Umbraco database. Alternative implementations can be configured by implementing the `IOAuthClientStore` interface.
-* ##### RefreshTokenStore : IOAuthRefreshTokenStore
-  _[optional, default:null]_
+* __RefreshTokenStore : IOAuthRefreshTokenStore__  
+  _[optional, default:null]_  
   Defines a store for OAuth refresh token information. If not null, authentication responses will include a `refresh_token` parameter which can be used to re-authenticate a user without needing to use their username / password credentials, allowing you to extend the lifespan of an access token. If null, refresh tokens will not be issued. Out of the box, Umbraco.OAuth comes with 1 implementation, `UmbracoDbOAuthRefreshTokenStore`, which stores the refresh tokens in a custom database table in the Umbraco database. Alternative implementations can be configured by implementing the `IOAuthRefreshTokenStore` interface.
-* ##### RefreshTokenLifeTime : int
-  _[optional, default:1440]_
+* __RefreshTokenLifeTime : int__  
+  _[optional, default:1440]_  
  Sets the lifespan, in minutes, of a refresh token before it can no longer be used. Can be long lived. If a client store is configured, this will get overridden by the client settings.
 * ##### AllowedOrigin : string
   _[optional, default:"*"]_
