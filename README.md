@@ -27,7 +27,7 @@ For the most basic OAuth implementation, the following minimal configuration is 
         UserService = new UmbracoMembersOAuthUserService(),
         SymmetricKey = "856FECBA3B06519C8DDDBC80BB080553",
         AccessTokenLifeTime = 20, // Minutes
-        RequireHttps = false
+        AllowInsecureHttp = true // During development only
     });
 ````
 
@@ -44,7 +44,7 @@ For a more advanced OAuth implementation, the following conifguration shows all 
         RefreshTokenStore = new UmbracoDbOAuthRefreshTokenStore(),
         RefreshTokenLifeTime = 1440, // Minutes (1 day)
         AllowedOrigin = "*",
-        RequireHttps = false
+        AllowInsecureHttp = true // During development only
     });
 ````
 This will create an endpoint the same as the basic configuration with added support of refresh tokens and a client store.
