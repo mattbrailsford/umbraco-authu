@@ -71,8 +71,8 @@ This will create an endpoint the same as the basic configuration with added supp
 * __RefreshTokenLifeTime : int__  
   _[optional, default:1440]_  
  Sets the lifespan, in minutes, of a refresh token before it can no longer be used. Can be long lived. If a client store is configured, this will get overridden by the client settings.
-* ##### AllowedOrigin : string
-  _[optional, default:"*"]_
+* __AllowedOrigin : string__  
+  _[optional, default:"*"]_  
   Sets the allowed domain from which authentication requests can be made. If developing a web application, it is strongly recommended to set this to the domain from which your app it hosted at to prevent access from unwanted sources. If developing an app, can be set to wildcard "*" which will allow any source to access it, however it is strongly recommended you used a client store which requires a secret key to be passed. If a client store is configured, this will get overridden by the client settings.
 
 ## Usage
