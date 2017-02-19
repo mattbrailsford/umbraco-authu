@@ -26,5 +26,7 @@ namespace Umbraco.OAuth
         public IOAuthRefreshTokenStore RefreshTokenStore { get; set; }
 
         public int RefreshTokenLifeTime { get; set; }
+
+        public bool AllowInsecureHttp { get; set; }
     }
 }

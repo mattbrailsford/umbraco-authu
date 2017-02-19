@@ -26,7 +26,8 @@ For the most basic OAuth implementation, the following minimal configuration is 
     OAuth.ConfigureEndpoint("/oauth/token", new OAuthOptions {
         UserService = new UmbracoMembersOAuthUserService(),
         SymmetricKey = "856FECBA3B06519C8DDDBC80BB080553",
-        AccessTokenLifeTime = 20 // Minutes
+        AccessTokenLifeTime = 20, // Minutes
+        RequireHttps = false
     });
 ````
 
@@ -42,7 +43,8 @@ For a more advanced OAuth implementation, the following conifguration shows all 
         ClientStore = new UmbracoDbOAuthClientStore(),
         RefreshTokenStore = new UmbracoDbOAuthRefreshTokenStore(),
         RefreshTokenLifeTime = 1440, // Minutes (1 day)
-        AllowedOrigin = "*"
+        AllowedOrigin = "*",
+        RequireHttps = false
     });
 ````
 This will create an endpoint the same as the basic configuration with added support of refresh tokens and a client store.
@@ -75,6 +77,9 @@ This will create an endpoint the same as the basic configuration with added supp
 * __AllowedOrigin : string__  
   _[optional, default:"*"]_  
   Sets the allowed domain from which authentication requests can be made. If developing a web application, it is strongly recommended to set this to the domain from which your app it hosted at to prevent access from unwanted sources. If developing an app, can be set to wildcard "*" which will allow any source to access it, however it is strongly recommended you used a client store which requires a secret key to be passed. If a client store is configured, this will get overridden by the client settings.
+* __AllowInsecureHttp : bool__  
+  _[optional, default:false]_  
+  Sets whether the api should allow requests over insecure HTTP. You'll probably want to set this to `true` during development, but it is strongly advised to disable this in the live environment.
 
 ## Usage
 ### Authenticating
@@ -148,21 +153,6 @@ Example:
       Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJuYW1laWQiOiIxMDgxIiwidW5pcXVlX25hbWUiOiJtZW1iZXIiLCJyb2xlIjoiTWVtYmVyIiwicmVhbG0iOiJkZWZhdWx0IiwiZXhwIjoxNDg3NDk2NzM3LCJuYmYiOjE0ODc0OTU1Mzd9.9uiIxrPggvH5nyLbH4UKIL52V6l5mpOyJ26J12FkXvI
     Response:
     "Hello Joe"
-
-## Other Considerations
-
-Whilst Umbraco.OAuth does not enforce a https connection, it is stronly recommended that on your live environment you write a rewrite rule to block any non https traffic. You should protected your oauth endpoint and your api controllers.
-
-    <rewrite>
-      <rule name="Block non HTTPS traffic" stopProcessing="true">
-        <match url="(.*)" />
-        <conditions>
-          <add input="{HTTPS}" pattern="^OFF$" />
-          <add input="{REQUEST_URI}" pattern="^(/oauth/|/umbraco/api/myapi/).*$" />
-        </conditions>
-        <action type="AbortRequest" />
-      </rule>
-    </rewrite>
 
 ## Contributing To This Project
 

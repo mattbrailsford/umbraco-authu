@@ -9,5 +9,7 @@ namespace Umbraco.OAuth.Interfaces
         int AccessTokenLifeTime { get; }
 
         int RefreshTokenLifeTime { get; }
+
+        bool AllowInsecureHttp { get; }
     }
 }
