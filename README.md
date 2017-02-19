@@ -11,7 +11,7 @@ There's also a nightly Nuget feed: [`https://www.myget.org/F/umbraco-oauth/api/v
 
 ## Configuration
 Umbraco.OAuth is configured using the `OAuth.ConfigureEndpoint` helper inside an Umbraco `ApplicationEventHandler` like so:
-
+````csharp 
     public class Boostrap : ApplicationEventHandler
     {
         protected override void ApplicationStarted(UmbracoApplicationBase app, ApplicationContext ctx)
@@ -19,21 +19,22 @@ Umbraco.OAuth is configured using the `OAuth.ConfigureEndpoint` helper inside an
             OAuth.ConfigureEndpoint(...);
         }
     }
-
+````
 ### Basic Configuration
 For the most basic OAuth implementation, the following minimal configuration is all that is needed:
-
+````csharp 
     OAuth.ConfigureEndpoint("/oauth/token", new OAuthOptions {
         UserService = new UmbracoMembersOAuthUserService(),
         SymmetricKey = "856FECBA3B06519C8DDDBC80BB080553",
         AccessTokenLifeTime = 20 // Minutes
     });
+````
 
 This will create an endpoint at the path `/oauth/token`, authenticating requests against the Umbraco members store, issuing access tokens with a lifespan of 20 minutes.
 
 ### Advanced Configuration
 For a more advanced OAuth implementation, the following conifguration shows all the supported options.
-
+````csharp 
     OAuth.ConfigureEndpoint("realm", "/oauth/token", new OAuthOptions {
         UserService = new UmbracoMembersOAuthUserService(),
         SymmetricKey = "856FECBA3B06519C8DDDBC80BB080553",
@@ -43,7 +44,7 @@ For a more advanced OAuth implementation, the following conifguration shows all 
         RefreshTokenLifeTime = 1440, // Minutes (1 day)
         AllowedOrigin = "*"
     });
-
+````
 This will create an endpoint the same as the basic configuration with added support of refresh tokens and a client store.
 
 ### Configuration Options
