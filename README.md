@@ -153,16 +153,16 @@ Example:
 
 Whilst Umbraco.OAuth does not enforce a https connection, it is stronly recommended that on your live environment you write a rewrite rule to enforce this for you. You should protected your oauth endpoint and your api controllers.
 
-  <rewrite>
-    <rule name="Block non HTTPS traffic" stopProcessing="true">
-      <match url="(.*)" />
-      <conditions>
-        <add input="{HTTPS}" pattern="^OFF$" />
-        <add input="{REQUEST_URI}" pattern="^(/oauth/|/umbraco/api/myapi/).*$" />
-      </conditions>
-      <action type="AbortRequest" />
-    </rule>
-  </rewrite>
+    <rewrite>
+      <rule name="Block non HTTPS traffic" stopProcessing="true">
+        <match url="(.*)" />
+        <conditions>
+          <add input="{HTTPS}" pattern="^OFF$" />
+          <add input="{REQUEST_URI}" pattern="^(/oauth/|/umbraco/api/myapi/).*$" />
+        </conditions>
+        <action type="AbortRequest" />
+      </rule>
+    </rewrite>
 
 ## Contributing To This Project
 
