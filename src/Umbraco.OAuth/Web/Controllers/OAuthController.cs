@@ -119,8 +119,10 @@ namespace Umbraco.OAuth.Web.Controllers
             // Construct an identity
             var claims = Context.Services.UserService.GetUserClaims(username);
 
-            var identity = new ClaimsIdentity(claims, "OAuth");
+            var identity = new ClaimsIdentity("OAuth");
+            identity.AddClaim(new Claim(ClaimTypes.Name, Context.Realm));
             identity.AddClaim(new Claim(OAuth.ClaimTypes.Realm, Context.Realm));
+            identity.AddClaims(claims);
 
             var response = new OAuthTokenResponse
             {

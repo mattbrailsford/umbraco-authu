@@ -30,7 +30,6 @@ namespace Umbraco.OAuth.Services
             if (member != null)
             {
                 yield return new Claim(ClaimTypes.NameIdentifier, member.ProviderUserKey.ToString());
-                yield return new Claim(ClaimTypes.Name, member.UserName);
 
                 var roles = Roles.GetRolesForUser(member.UserName);
                 foreach (var role in roles)
