@@ -123,7 +123,7 @@ If any authentication request fails, a status of `401 Unauthorized` will be retu
 
 ### Protecting Your API Controllers
 With your endpoint working and issuing tokens, you can protect your API controllers by adding the `OAuth` attribute to your classes, and then use the standard `Authorize` attribute to restrict action access as follows:
-
+````csharp 
     [OAuth]
     public class MyApiController : UmbracoApiController
     {
@@ -134,7 +134,7 @@ With your endpoint working and issuing tokens, you can protect your API controll
             return "Hello " + Members.GetCurrentMember()?.Name;
         }
     }
-
+````
 The `OAuth` attribute has a single optional parameter, `Realm`, which allows you to define which realm this controller is associated with. If a realm is configured, only access tokens that were generated from the associated endpoint will be valid.
 
 ### Accessing Protected Actions
