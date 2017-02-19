@@ -3,17 +3,6 @@ using Umbraco.OAuth.Services;
 
 namespace Umbraco.OAuth
 {
-    public interface IOAuthOptions
-    {
-        string SymmetricKey { get; }
-
-        string AllowedOrigin { get; }
-
-        int AccessTokenLifeTime { get; }
-
-        int RefreshTokenLifeTime { get; }
-    }
-
     public class OAuthOptions : IOAuthOptions
     {
         public OAuthOptions()
@@ -31,6 +20,8 @@ namespace Umbraco.OAuth
         public string AllowedOrigin { get; set; }
 
         public int AccessTokenLifeTime { get; set; }
+
+        public IOAuthClientStore ClientStore { get; set; }
 
         public IOAuthRefreshTokenStore RefreshTokenStore { get; set; }
 

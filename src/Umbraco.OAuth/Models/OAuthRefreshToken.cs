@@ -20,6 +20,12 @@ namespace Umbraco.OAuth.Models
         public string UserType { get; set; }
 
         [NullSetting(NullSetting = NullSettings.NotNull)]
+        public string Realm { get; set; }
+
+        [NullSetting(NullSetting = NullSettings.NotNull)]
+        public string ClientId { get; set; }
+
+        [NullSetting(NullSetting = NullSettings.NotNull)]
         public DateTime IssuedUtc { get; set; }
 
         [NullSetting(NullSetting = NullSettings.NotNull)]

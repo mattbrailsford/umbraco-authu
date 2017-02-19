@@ -1,4 +1,5 @@
-﻿using Umbraco.OAuth.Services;
+﻿using Umbraco.OAuth.Interfaces;
+using Umbraco.OAuth.Services;
 
 namespace Umbraco.OAuth
 {
@@ -20,6 +21,7 @@ namespace Umbraco.OAuth
             // Create services
             Services = new OAuthServicesContext(
                 options.UserService,
+                options.ClientStore,
                 options.RefreshTokenStore,
                 new JwtTokenService(options.SymmetricKey));
         }

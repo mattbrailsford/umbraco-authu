@@ -4,12 +4,9 @@ using System.Web.Http;
 
 namespace Umbraco.OAuth
 {
-    public class OAuth
+    public partial class OAuth
     {
         private static ConcurrentDictionary<string, OAuthContext> _contexts = new ConcurrentDictionary<string, OAuthContext>();
-
-        internal static readonly string DefaultRealm = "default";
-        internal static readonly string DefaultEndpointPath = "/oauth/token";
 
         public static OAuthContext GetContext()
         {

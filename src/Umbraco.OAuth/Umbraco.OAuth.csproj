@@ -273,6 +273,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Data\InMemoryOAuthClientStore.cs" />
+    <Compile Include="Data\UmbracoDbOAuthClientStore.cs" />
+    <Compile Include="Interfaces\IOAuthOptions.cs" />
+    <Compile Include="Interfaces\IOAuthClientStore.cs" />
+    <Compile Include="Models\OAuthClient.cs" />
+    <Compile Include="OAuthConstants.cs" />
     <Compile Include="OAuthContext.cs" />
     <Compile Include="Services\MembershipProviderOAuthUserService.cs" />
     <Compile Include="Web\BaseOAuthAttribute.cs" />
@@ -295,6 +301,7 @@
     <Compile Include="OAuthOptions.cs" />
     <Compile Include="OAuthServicesContext.cs" />
     <Compile Include="Web\Controllers\OAuthController.cs" />
+    <Compile Include="Web\OAuthResponseException.cs" />
     <Compile Include="Web\WebApi\AddOAuthChallengeResult.cs" />
     <Compile Include="Web\WebApi\OAuthAttribute.cs" />
   </ItemGroup>

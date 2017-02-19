@@ -15,7 +15,8 @@ namespace Umbraco.OAuth.Services
 
         public bool ValidateUser(string username)
         {
-            return this.MemberProvider.GetUser(username, false) != null;
+            var user = this.MemberProvider.GetUser(username, false);
+            return user != null && user.IsApproved && !user.IsLockedOut;
         }
 
         public bool ValidateUser(string username, string password)

@@ -6,16 +6,20 @@ namespace Umbraco.OAuth
     {
         public IOAuthUserService UserService { get; private set; }
 
-        public IOAuthRefreshTokenStore TokenStore { get; private set; }
+        public IOAuthClientStore ClientStore { get; private set; }
+
+        public IOAuthRefreshTokenStore RefreshTokenStore { get; private set; }
 
         public IOAuthTokenService TokenService { get; private set; }
 
         internal OAuthServicesContext(IOAuthUserService userService,
-            IOAuthRefreshTokenStore tokenStore,
+            IOAuthClientStore clientStore,
+            IOAuthRefreshTokenStore refreshTokenStore,
             IOAuthTokenService tokenService)
         {
             UserService = userService;
-            TokenStore = tokenStore;
+            ClientStore = clientStore;
+            RefreshTokenStore = refreshTokenStore;
             TokenService = tokenService;
         }
     }

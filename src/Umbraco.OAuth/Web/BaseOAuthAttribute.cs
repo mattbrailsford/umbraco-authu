@@ -31,7 +31,7 @@ namespace Umbraco.OAuth.Web
                 return false;
 
             // Make sure principal belongs to realm
-            var realm = principal.Claims.FirstOrDefault(x => x.Type == ClaimTypes.GroupSid)?.Value;
+            var realm = principal.Claims.FirstOrDefault(x => x.Type == OAuth.ClaimTypes.Realm)?.Value;
             if (realm == null || realm != Realm)
                 return false;
 
