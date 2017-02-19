@@ -148,3 +148,17 @@ Example:
       Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJuYW1laWQiOiIxMDgxIiwidW5pcXVlX25hbWUiOiJtZW1iZXIiLCJyb2xlIjoiTWVtYmVyIiwicmVhbG0iOiJkZWZhdWx0IiwiZXhwIjoxNDg3NDk2NzM3LCJuYmYiOjE0ODc0OTU1Mzd9.9uiIxrPggvH5nyLbH4UKIL52V6l5mpOyJ26J12FkXvI
     Response:
     "Hello Joe"
+
+## Contributing To This Project
+
+Anyone and everyone is welcome to contribute. Please take a moment to review the [guidelines for contributing](CONTRIBUTING.md).
+
+* [Bug reports](CONTRIBUTING.md#bugs)
+* [Feature requests](CONTRIBUTING.md#features)
+* [Pull requests](CONTRIBUTING.md#pull-requests)
+
+## License
+
+Copyright &copy; 2017 Matt Brialsford, Outfield Digital Ltd 
+
+Licensed under the [MIT License](LICENSE.md)
