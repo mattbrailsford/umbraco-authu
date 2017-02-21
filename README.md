@@ -1,16 +1,16 @@
-# Umbraco.OAuth
-Umbraco.OAuth is an add-on library to [Umbraco](https://github.com/umbraco/umbraco-cms) providing a simplified OAuth2 endpoint from which you can authenticate Umbraco Members/Users and use it to protect your API controllers. Ideal for developing web/mobile apps.
+# AuthU
+AuthU is an add-on library to [Umbraco](https://github.com/umbraco/umbraco-cms) providing a simplified OAuth2 endpoint from which you can authenticate Umbraco Members/Users and use it to protect your API controllers. Ideal for developing web/mobile apps.
 
 ## Installation
 
 ### Nuget
 
-    PM> Install-Package Umbraco.OAuth
+    PM> Install-Package Our.Umbraco.AuthU
 
-There's also a nightly Nuget feed: [`https://www.myget.org/F/umbraco-oauth/api/v2`](https://www.myget.org/F/umbraco-oauth/api/v2)
+There's also a nightly Nuget feed: [`https://www.myget.org/F/umbraco-authu/api/v2`](https://www.myget.org/F/umbraco-authu/api/v2)
 
 ## Configuration
-Umbraco.OAuth is configured using the `OAuth.ConfigureEndpoint` helper inside an Umbraco `ApplicationEventHandler` like so:
+AuthU is configured using the `OAuth.ConfigureEndpoint` helper inside an Umbraco `ApplicationEventHandler` like so:
 ````csharp 
     public class Boostrap : ApplicationEventHandler
     {
@@ -58,7 +58,7 @@ This will create an endpoint the same as the basic configuration with added supp
   The path of the endpoint (__IMPORTANT!__ Be sure to add this to the `umbracoReservedPaths` app setting)
 * __UserService : IOAuthUserService__  
   _[optional, default:"new UmbracoMembersOAuthUserService()"]_  
-  The service from which to validate authentication requests against. Out of the box Umbraco.OAuth comes with 2 implementations, `UmbracoMembersOAuthUserService` and `UmbracoUsersOAuthUserService` with authenticate against the Umbraco members and users store respectively. Custom sources can be configured by implementing the `IOAuthUserService` interface yourself.
+  The service from which to validate authentication requests against. Out of the box AuthU comes with 2 implementations, `UmbracoMembersOAuthUserService` and `UmbracoUsersOAuthUserService` with authenticate against the Umbraco members and users store respectively. Custom sources can be configured by implementing the `IOAuthUserService` interface yourself.
 * __SymmetricKey : string__  
   _[required]_  
   A symetric key used to sign the generated access tokens. Must be a string 32 characters long, BASE64 encoded.
@@ -67,10 +67,10 @@ This will create an endpoint the same as the basic configuration with added supp
   Sets the lifespan, in minutes, of an access token before re-authentication is required. Should be short lived.
 * __ClientStore : IOAuthClientStore__  
   _[optional, default:null]_  
-  Defines a store for OAuth client information. If not null, all authentication requests are required to pass valid client credentials in order for authentication to be successful. If null, client crendetials are not required to authenticate. Out of the box Umbraco.OAuth comes with 2 implementations, `InMemoryOAuthClientStore` which stores a fixed list of client credentials in memory and `UmbracoDbOAuthClientStore` which stores the client credentials in a custom database table in the Umbraco database (Umbraco.OAuth does not provide an api for creating clients, so you'll need to configure these manually in the database, or write your own CRUD layer). Alternative implementations can be configured by implementing the `IOAuthClientStore` interface.
+  Defines a store for OAuth client information. If not null, all authentication requests are required to pass valid client credentials in order for authentication to be successful. If null, client crendetials are not required to authenticate. Out of the box AuthU comes with 2 implementations, `InMemoryOAuthClientStore` which stores a fixed list of client credentials in memory and `UmbracoDbOAuthClientStore` which stores the client credentials in a custom database table in the Umbraco database (AuthU does not provide an api for creating clients, so you'll need to configure these manually in the database, or write your own CRUD layer). Alternative implementations can be configured by implementing the `IOAuthClientStore` interface.
 * __RefreshTokenStore : IOAuthRefreshTokenStore__  
   _[optional, default:null]_  
-  Defines a store for OAuth refresh token information. If not null, authentication responses will include a `refresh_token` parameter which can be used to re-authenticate a user without needing to use their username / password credentials, allowing you to extend the lifespan of an access token. If null, refresh tokens will not be issued. Out of the box, Umbraco.OAuth comes with 1 implementation, `UmbracoDbOAuthRefreshTokenStore`, which stores the refresh tokens in a custom database table in the Umbraco database. Alternative implementations can be configured by implementing the `IOAuthRefreshTokenStore` interface.
+  Defines a store for OAuth refresh token information. If not null, authentication responses will include a `refresh_token` parameter which can be used to re-authenticate a user without needing to use their username / password credentials, allowing you to extend the lifespan of an access token. If null, refresh tokens will not be issued. Out of the box, AuthU comes with 1 implementation, `UmbracoDbOAuthRefreshTokenStore`, which stores the refresh tokens in a custom database table in the Umbraco database. Alternative implementations can be configured by implementing the `IOAuthRefreshTokenStore` interface.
 * __RefreshTokenLifeTime : int__  
   _[optional, default:1440]_  
  Sets the lifespan, in minutes, of a refresh token before it can no longer be used. Can be long lived. If a client store is configured, this will get overridden by the client settings.

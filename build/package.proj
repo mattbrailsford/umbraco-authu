@@ -14,19 +14,19 @@
 
 	<!-- SHARED PROPERTIES -->
 	<PropertyGroup>
-		<ProjectName>Umbraco.OAuth</ProjectName>
-		<PackageId>Umbraco.OAuth</PackageId>
-		<PackageName>Umbraco.OAuth</PackageName>
+		<ProjectName>Our.Umbraco.AuthU</ProjectName>
+		<PackageId>Our.Umbraco.AuthU</PackageId>
+		<PackageName>Our.Umbraco.AuthU</PackageName>
 		<Readme>An Umbraco plugin to add an OAuth API endpoint to allow authenticated Members/Users via OAuth</Readme>
 		<AuthorName>Matt Brailsford</AuthorName>
-		<AuthorUrl>https://github.com/mattbrailsford/Umbraco.OAuth/graphs/contributors</AuthorUrl>
+		<AuthorUrl>https://github.com/mattbrailsford/umbraco-authu/graphs/contributors</AuthorUrl>
 		<Owners>Matt Brailsford</Owners>
 		<Copyright>Copyright &#169; 2017 Matt Brailsford</Copyright>
 		<PackageLicenseName>MIT license</PackageLicenseName>
 		<PackageLicenseUrl>http://opensource.org/licenses/MIT</PackageLicenseUrl>		
 		<RequireLicenseAcceptance>false</RequireLicenseAcceptance>
-		<ProjectUrl>https://github.com/mattbrailsford/Umbraco.OAuth</ProjectUrl>
-		<IconUrl>https://raw.githubusercontent.com/mattbrailsford/Umbraco.OAuth/master/docs/img/logo.png</IconUrl>
+		<ProjectUrl>https://github.com/mattbrailsford/umbraco-authu</ProjectUrl>
+		<IconUrl>https://raw.githubusercontent.com/mattbrailsford/umbraco-authu/master/docs/img/logo.png</IconUrl>
 		<Tags>umbraco oauth oauth2</Tags>
 		<Language>en-GB</Language>
 	</PropertyGroup>
