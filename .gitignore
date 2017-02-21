@@ -45,7 +45,7 @@ dlldata.c
 project.lock.json
 artifacts/
 
-*_i.c
+*_i.c 
 *_p.c
 *_i.h
 *.ilk
