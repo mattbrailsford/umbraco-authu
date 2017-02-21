@@ -24,8 +24,8 @@ artifacts:
 deploy:
     # MyGet Deployment for builds & releases
   - provider: NuGet
-    server: https://www.myget.org/F/umbraco-oauth/api/v2/package
-    symbol_server: https://www.myget.org/F/umbraco-oauth/symbols/api/v2/package
+    server: https://www.myget.org/F/umbraco-authu/api/v2/package
+    symbol_server: https://www.myget.org/F/umbraco-authu/symbols/api/v2/package
     api_key:
       secure: gHDTL46KZcLzj6J8m//TJgaCOJCl9ixR//rXjO18HRlCsfPYYz7dU81u2D5zd+ZN
     artifact: /.*\.nupkg/
