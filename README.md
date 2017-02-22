@@ -57,11 +57,11 @@ This will create an endpoint the same as the basic configuration with added supp
   _[optional, default:"/oauth/token"]_  
   The path of the endpoint (__IMPORTANT!__ Be sure to add this to the `umbracoReservedPaths` app setting)
 * __UserService : IOAuthUserService__  
-  _[optional, default:"new UmbracoMembersOAuthUserService()"]_  
-  The service from which to validate authentication requests against. Out of the box AuthU comes with 2 implementations, `UmbracoMembersOAuthUserService` and `UmbracoUsersOAuthUserService` with authenticate against the Umbraco members and users store respectively. Custom sources can be configured by implementing the `IOAuthUserService` interface yourself.
+  _[optional, default:new UmbracoMembersOAuthUserService()]_  
+  The service from which to validate authentication requests against. Out of the box AuthU comes with 2 implementations, `UmbracoMembersOAuthUserService` and `UmbracoUsersOAuthUserService` which authenticate against the Umbraco members and users store respectively. Custom sources can be configured by implementing the `IOAuthUserService` interface yourself.
 * __SymmetricKey : string__  
   _[required]_  
-  A symetric key used to sign the generated access tokens. Must be a string 32 characters long, BASE64 encoded.
+  A symetric key used to sign the generated access tokens. Must be a string, 32 characters long, BASE64 encoded.
 * __AccessTokenLifeTime : int__  
   _[optional, default:20]_  
   Sets the lifespan, in minutes, of an access token before re-authentication is required. Should be short lived.
@@ -76,7 +76,7 @@ This will create an endpoint the same as the basic configuration with added supp
  Sets the lifespan, in minutes, of a refresh token before it can no longer be used. Can be long lived. If a client store is configured, this will get overridden by the client settings.
 * __AllowedOrigin : string__  
   _[optional, default:"*"]_  
-  Sets the allowed domain from which authentication requests can be made. If developing a web application, it is strongly recommended to set this to the domain from which your app it hosted at to prevent access from unwanted sources. If developing an app, can be set to wildcard "*" which will allow any source to access it, however it is strongly recommended you used a client store which requires a secret key to be passed. If a client store is configured, this will get overridden by the client settings.
+  Sets the allowed domain from which authentication requests can be made. If developing a web application, it is strongly recommended to set this to the domain from which your app is hosted at to prevent access from unwanted sources. If developing a mobile app, it can be set to wildcard "*" which will allow any source to access it, however it is strongly recommended you use a client store which requires a secret key to be passed. If a client store is configured, this will get overridden by the client settings.
 * __AllowInsecureHttp : bool__  
   _[optional, default:false]_  
   Sets whether the api should allow requests over insecure HTTP. You'll probably want to set this to `true` during development, but it is strongly advised to disable this in the live environment.
@@ -86,7 +86,7 @@ This will create an endpoint the same as the basic configuration with added supp
 With an endpoint configured, initial authentication can be performed by sending a POST request to the endpoints url with a body containing the following key values:
 * __grant_type__ = "password"
 * __username__ = The users username
-* __password__ = The members password
+* __password__ = The users password
 * __client_id__ = A valid client id (Only required if a client store is configured)
 * __client_secret__ = A valid client secret (Only required if a client store is configured, and the client is "secure")
 
