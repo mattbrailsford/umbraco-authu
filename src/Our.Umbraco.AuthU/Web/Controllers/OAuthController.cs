@@ -120,7 +120,7 @@ namespace Our.Umbraco.AuthU.Web.Controllers
             var claims = Context.Services.UserService.GetUserClaims(username);
 
             var identity = new ClaimsIdentity("OAuth");
-            identity.AddClaim(new Claim(ClaimTypes.Name, Context.Realm));
+            identity.AddClaim(new Claim(ClaimTypes.Name, username));
             identity.AddClaim(new Claim(OAuth.ClaimTypes.Realm, Context.Realm));
             identity.AddClaims(claims);
 
