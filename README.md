@@ -55,7 +55,7 @@ This will create an endpoint the same as the basic configuration with added supp
   A uniqie alias for the configuration, allowing you to configure multiple endpoints.
 * __Path : string__  
   _[optional, default:"/oauth/token"]_  
-  The path of the endpoint (__IMPORTANT!__ Be sure to add this to the `umbracoReservedPaths` app setting)
+  The path of the endpoint (__IMPORTANT!__ Be sure to add the base of the path to the `umbracoReservedPaths` app setting, ie `~/oauth/`)
 * __UserService : IOAuthUserService__  
   _[optional, default:new UmbracoMembersOAuthUserService()]_  
   The service from which to validate authentication requests against. Out of the box AuthU comes with 2 implementations, `UmbracoMembersOAuthUserService` and `UmbracoUsersOAuthUserService` which authenticate against the Umbraco members and users store respectively. Custom sources can be configured by implementing the `IOAuthUserService` interface yourself.
