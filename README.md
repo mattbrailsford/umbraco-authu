@@ -93,11 +93,11 @@ With an endpoint configured, initial authentication can be performed by sending 
 Example (with client store and refresh token stores configured):
 
     Request URL:
-    POST https://mydomain.com/oauth/token
+      POST https://mydomain.com/oauth/token
     Request Headers:
       Content-Type: application/x-www-form-urlencoded
     Request POST Body:
-    grant_type=password&username=joebloggs&password=password1234&client_id=myclient&client_secret=myclientsecret
+      grant_type=password&username=joebloggs&password=password1234&client_id=myclient&client_secret=myclientsecret
     Response:
     {
       "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJuYW1laWQiOiIxMDgxIiwidW5pcXVlX25hbWUiOiJtZW1iZXIiLCJyb2xlIjoiTWVtYmVyIiwicmVhbG0iOiJkZWZhdWx0IiwiZXhwIjoxNDg3NDk2NzM3LCJuYmYiOjE0ODc0OTU1Mzd9.9uiIxrPggvH5nyLbH4UKIL52V6l5mpOyJ26J12FkXvI",
@@ -115,11 +115,11 @@ A subsequent refresh token authentication request can be performed by sending a 
 Example (with client store and refresh token stores configured):
 
     Request URL:
-    POST https://mydomain.com/oauth/token
+      POST https://mydomain.com/oauth/token
     Request Headers:
       Content-Type: application/x-www-form-urlencoded
     Request POST Body:
-    grant_type=refresh_token&refresh_token=b3cc9c66b86340c5b743f2a7cec9d2f1&client_id=myclient&client_secret=myclientsecret
+      grant_type=refresh_token&refresh_token=b3cc9c66b86340c5b743f2a7cec9d2f1&client_id=myclient&client_secret=myclientsecret
     Response:
     {
       "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJuYW1laWQiOiIxMDgxIiwidW5pcXVlX25hbWUiOiJtZW1iZXIiLCJyb2xlIjoiTWVtYmVyIiwicmVhbG0iOiJkZWZhdWx0IiwiZXhwIjoxNDg3NDk2NzM3LCJuYmYiOjE0ODc0OTU1Mzd9.9uiIxrPggvH5nyLbH4UKIL52V6l5mpOyJ26J12FkXvI",
@@ -152,7 +152,7 @@ To access a protected action, an `Authorization` header should be added to the r
 Example:
 
     Request URL:
-    POST https://mydomain.com/umbraco/api/myapi/helloworld
+      POST https://mydomain.com/umbraco/api/myapi/helloworld
     Request Headers:
       Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJuYW1laWQiOiIxMDgxIiwidW5pcXVlX25hbWUiOiJtZW1iZXIiLCJyb2xlIjoiTWVtYmVyIiwicmVhbG0iOiJkZWZhdWx0IiwiZXhwIjoxNDg3NDk2NzM3LCJuYmYiOjE0ODc0OTU1Mzd9.9uiIxrPggvH5nyLbH4UKIL52V6l5mpOyJ26J12FkXvI
     Response:
