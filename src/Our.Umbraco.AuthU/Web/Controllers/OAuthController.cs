@@ -33,6 +33,9 @@ namespace Our.Umbraco.AuthU.Web.Controllers
             if (!Context.Options.AllowInsecureHttp && Request.RequestUri.Scheme != Uri.UriSchemeHttps)
                 throw new OAuthResponseException(HttpStatusCode.UpgradeRequired, new { invalid_scheme = "Requests must be made over HTTPS" });
 
+            if (request == null)
+                throw new OAuthResponseException(HttpStatusCode.BadRequest, new { invalid_request = "Invalid request, please make sure to post request data as application/x-www-form-urlencoded" });
+
             ProcessClient(request);
 
             HttpContext.Current.Response.Headers.Add("Access-Control-Allow-Origin", Client != null ? Client.AllowedOrigin : Context.Options.AllowedOrigin);

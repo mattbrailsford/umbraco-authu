@@ -83,7 +83,7 @@ This will create an endpoint the same as the basic configuration with added supp
 
 ## Usage
 ### Authenticating
-With an endpoint configured, initial authentication can be performed by sending a POST request to the endpoints url with a body containing the following key values:
+With an endpoint configured, initial authentication can be performed by sending an POST request to the endpoints url with a body of content type `application/x-www-form-urlencoded`, containing the following key values:
 * __grant_type__ = "password"
 * __username__ = The users username
 * __password__ = The users password
@@ -94,6 +94,8 @@ Example (with client store and refresh token stores configured):
 
     Request URL:
     POST https://mydomain.com/oauth/token
+    Request Headers:
+      Content-Type: application/x-www-form-urlencoded
     Request POST Body:
     grant_type=password&username=joebloggs&password=password1234&client_id=myclient&client_secret=myclientsecret
     Response:
@@ -104,7 +106,7 @@ Example (with client store and refresh token stores configured):
       "refresh_token": "b3cc9c66b86340c5b743f2a7cec9d2f1"
     }
     
-A subsequent refresh token authentication request can be performed by sending a POST request to the endpoints url with a body containing the following key values:
+A subsequent refresh token authentication request can be performed by sending a POST request to the endpoints url with a body of content type `application/x-www-form-urlencoded`, containing the following key values:
 * __grant_type__ = "refresh_token"
 * __refresh_token__ = The refresh token returned from the original authentication request
 * __client_id__ = A valid client id (Only required if a client store is configured)
@@ -114,6 +116,8 @@ Example (with client store and refresh token stores configured):
 
     Request URL:
     POST https://mydomain.com/oauth/token
+    Request Headers:
+      Content-Type: application/x-www-form-urlencoded
     Request POST Body:
     grant_type=refresh_token&refresh_token=b3cc9c66b86340c5b743f2a7cec9d2f1&client_id=myclient&client_secret=myclientsecret
     Response:
