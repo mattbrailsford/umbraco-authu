@@ -36,7 +36,7 @@ namespace Our.Umbraco.AuthU.Web.Controllers
 
             ProcessClient(request);
 
-	    SetOriginHeader();
+	    	SetAllowedOriginHeader();
             
             switch (request.grant_type)
             {
@@ -78,7 +78,7 @@ namespace Our.Umbraco.AuthU.Web.Controllers
             }
         }
 	
-		protected void SetOriginHeader()
+		protected void SetAllowedOriginHeader()
 		{
 			string AccessControlAllowOriginHeaderKey = "Access-Control-Allow-Origin";
 			string allowedOrigin = Client != null ? Client.AllowedOrigin : Context.Options.AllowedOrigin;
