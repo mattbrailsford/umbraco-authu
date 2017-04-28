@@ -78,24 +78,26 @@ namespace Our.Umbraco.AuthU.Web.Controllers
             }
         }
 	
-	protected void SetOriginHeader()
-	{
-		string allowedOrigin = Client != null ? Client.AllowedOrigin : Context.Options.AllowedOrigin;
-
-		if (HttpContext.Current.Response.Headers.AllKeys.Contains("Access-Control-Allow-Origin"))
+		protected void SetOriginHeader()
 		{
-			var accessControlHeader = HttpContext.Current.Response.Headers.GetValues("Access-Control-Allow-Origin").FirstOrDefault();
+			string AccessControlAllowOriginHeaderKey = "Access-Control-Allow-Origin";
+			string allowedOrigin = Client != null ? Client.AllowedOrigin : Context.Options.AllowedOrigin;
 
-			if (!accessControlHeader.Equals(allowedOrigin, StringComparison.OrdinalIgnoreCase))
+			if (HttpContext.Current.Response.Headers.AllKeys.Contains(AccessControlAllowOriginHeaderKey))
 			{
-				throw new Exception($"There is currently a header set with the key Access-Control-Allow-Origin, but the value: {accessControlHeader} differs from the OAuth configured value: {allowedOrigin}");
+				var accessControlHeader = HttpContext.Current.Response.Headers.GetValues(AccessControlAllowOriginHeaderKey).FirstOrDefault();
+
+				if (!accessControlHeader.Equals(allowedOrigin, StringComparison.OrdinalIgnoreCase))
+				{
+					string errorMessage = $"There is currently a header set with the key {AccessControlAllowOriginHeaderKey}, but the value: {accessControlHeader} differs from the OAuth configured value: {allowedOrigin}";
+					throw new OAuthResponseException(HttpStatusCode.InternalServerError, new { invalid_allowed_origin = errorMessage });
+				}
+			}
+			else
+			{
+				HttpContext.Current.Response.Headers.Add(AccessControlAllowOriginHeaderKey, allowedOrigin);
 			}
 		}
-		else
-		{
-			HttpContext.Current.Response.Headers.Add("Access-Control-Allow-Origin", Client != null ? Client.AllowedOrigin : Context.Options.AllowedOrigin);
-		}
-	}
 
         protected object ProcessPasswordTokenRequest(OAuthTokenRequest request)
         {
