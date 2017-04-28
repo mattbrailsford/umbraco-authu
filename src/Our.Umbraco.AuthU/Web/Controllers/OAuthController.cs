@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Http;
 using Our.Umbraco.AuthU.Extensions;
 using Our.Umbraco.AuthU.Models;
+using System.Linq;
 
 namespace Our.Umbraco.AuthU.Web.Controllers
 {
