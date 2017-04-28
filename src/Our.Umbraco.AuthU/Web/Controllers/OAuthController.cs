@@ -35,8 +35,10 @@ namespace Our.Umbraco.AuthU.Web.Controllers
 
             ProcessClient(request);
 
-            HttpContext.Current.Response.Headers.Add("Access-Control-Allow-Origin", Client != null ? Client.AllowedOrigin : Context.Options.AllowedOrigin);
-
+            if (!HttpContext.Current.Response.Headers.AllKeys.Contains("Access-Control-Allow-Origin"))
+			{
+				HttpContext.Current.Response.Headers.Add("Access-Control-Allow-Origin", Client != null ? Client.AllowedOrigin : Context.Options.AllowedOrigin);
+			}
             switch (request.grant_type)
             {
                 case "password":
