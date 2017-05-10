@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Concurrent;
+using System.Web;
 using System.Web.Http;
 
 namespace Our.Umbraco.AuthU
@@ -20,6 +21,19 @@ namespace Our.Umbraco.AuthU
             {
                 return config;
             }
+            
+            string currentAbsolutePath = HttpContext.Current.Request.Url.AbsolutePath;
+
+			if(!string.IsNullOrWhiteSpace(currentAbsolutePath))
+			{
+				// the umbraco upgrade process calls two methods in the /install/api/ when upgrading GetSetup and PostPerformInstall
+
+				if(currentAbsolutePath.StartsWith("/install/api/"))
+				{
+					// user is installing a new version of umbraco.
+					return config;
+				}
+			}
 
             throw new Exception($"And endpoint for the realm \"{realm}\" has not yet been configured. Please call ConfigureEndpoint first.");
         }
