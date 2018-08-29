@@ -285,7 +285,7 @@
     <Compile Include="Web\Mvc\AddOAuthChallengeResult.cs" />
     <Compile Include="Web\Mvc\OAuthAttribute.cs" />
     <Compile Include="Data\UmbracoDbOAuthRefreshTokenStore.cs" />
-    <Compile Include="Services\UmbracoUserService.cs" />
+    <Compile Include="Services\UmbracoUsersOAuthUserService.cs" />
     <Compile Include="Services\UmbracoMembersOAuthUserService.cs" />
     <Compile Include="Extensions\JsonExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
