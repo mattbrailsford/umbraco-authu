@@ -104,8 +104,12 @@ namespace Our.Umbraco.AuthU.Web.Controllers
 
         protected object ProcessPasswordTokenRequest(OAuthTokenRequest request)
         {
-            // Validate the user
-            if (Context.Services.UserService.ValidateUser(request.username, request.password))
+			// Make sure we have a username and password
+			if (string.IsNullOrWhiteSpace(request.username) || string.IsNullOrWhiteSpace(request.password))
+				throw new OAuthResponseException(HttpStatusCode.BadRequest, new { invalid_grant = "No username and/or password provided" });
+
+			// Validate the user
+			if (Context.Services.UserService.ValidateUser(request.username, request.password))
             {
                 return ProcessUsernameRequest(request.username);
             }
@@ -115,12 +119,16 @@ namespace Our.Umbraco.AuthU.Web.Controllers
 
         protected object ProcessRefreshTokenRequest(OAuthTokenRequest request)
         {
-            // Don't do anything if we don't have a token store registered
-            if (Context.Services.RefreshTokenStore == null)
+			// Make sure we have refresh token
+			if (string.IsNullOrWhiteSpace(request.refresh_token))
+				throw new OAuthResponseException(HttpStatusCode.BadRequest, new { invalid_refreshToken = "No refresh token provided" });
+
+			// Don't do anything if we don't have a token store registered
+			if (Context.Services.RefreshTokenStore == null)
                 throw new OAuthResponseException(HttpStatusCode.BadRequest, new { invalid_refreshToken = "A refresh token store is not registered in the system" });
 
-            // Lookup the refresh token
-            var key = request.refresh_token.GenerateHash();
+			// Lookup the refresh token
+			var key = request.refresh_token.GenerateHash();
             var token = Context.Services.RefreshTokenStore.FindRefreshToken(key);
             if (token != null)
             {
