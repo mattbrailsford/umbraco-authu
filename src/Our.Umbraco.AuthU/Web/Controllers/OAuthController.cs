@@ -86,6 +86,10 @@ namespace Our.Umbraco.AuthU.Web.Controllers
 			string AccessControlAllowOriginHeaderKey = "Access-Control-Allow-Origin";
 			string allowedOrigin = Client != null ? Client.AllowedOrigin : Context.Options.AllowedOrigin;
 
+			// If there is no allowed origin defined, just skip it
+			if (string.IsNullOrEmpty(allowedOrigin))
+				return;
+
 			if (HttpContext.Current.Response.Headers.AllKeys.Contains(AccessControlAllowOriginHeaderKey))
 			{
 				var accessControlHeader = HttpContext.Current.Response.Headers.GetValues(AccessControlAllowOriginHeaderKey).FirstOrDefault();
