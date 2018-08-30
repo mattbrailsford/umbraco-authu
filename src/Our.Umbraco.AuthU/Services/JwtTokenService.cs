@@ -54,7 +54,8 @@ namespace Our.Umbraco.AuthU.Services
                     RequireExpirationTime = true,
                     ValidateIssuer = false,
                     ValidateAudience = false,
-                    IssuerSigningKey = new SymmetricSecurityKey(symmetricKey)
+                    IssuerSigningKey = new SymmetricSecurityKey(symmetricKey),
+					ClockSkew = TimeSpan.Zero
                 };
 
                 SecurityToken securityToken;
