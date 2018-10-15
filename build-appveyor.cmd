@@ -4,4 +4,4 @@ ECHO APPVEYOR_BUILD_NUMBER : %APPVEYOR_BUILD_NUMBER%
 ECHO APPVEYOR_BUILD_VERSION : %APPVEYOR_BUILD_VERSION%
 
 CALL src\.nuget\NuGet.exe restore src\Our.Umbraco.AuthU.sln
-CALL "%programfiles(x86)%\MSBuild\14.0\Bin\amd64\MsBuild.exe" build\package.proj
+CALL "%programfiles(x86)%\Microsoft Visual Studio\2017\Community\MSBuild\15.0\Bin\amd64\MsBuild.exe" build\package.proj
