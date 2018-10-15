@@ -3,7 +3,6 @@ using System;
 using System.Net.Http.Headers;
 using System.Web.Mvc;
 using System.Web.Mvc.Filters;
-using Umbraco.Core;
 
 namespace Our.Umbraco.AuthU.Web.Mvc
 {
@@ -32,7 +31,7 @@ namespace Our.Umbraco.AuthU.Web.Mvc
             {
                 // Parse the Authentication header
                 var header = AuthenticationHeaderValue.Parse(request.Headers["Authorization"]);
-                if (header == null || header.Scheme != "Bearer" || header.Parameter.IsNullOrWhiteSpace())
+                if (header == null || header.Scheme != "Bearer" || string.IsNullOrWhiteSpace(header.Parameter))
                     return;
 
                 // Extract the principal from the header
