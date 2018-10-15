@@ -3,7 +3,7 @@ using System.IdentityModel.Tokens.Jwt;
 using Microsoft.IdentityModel.Tokens;
 using System.Security.Claims;
 using Our.Umbraco.AuthU.Interfaces;
-
+ 
 namespace Our.Umbraco.AuthU.Services
 {
     public class JwtTokenService : IOAuthTokenService
