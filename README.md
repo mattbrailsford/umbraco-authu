@@ -138,7 +138,7 @@ With your endpoint working and issuing tokens, you can protect your API controll
     {
         [HttpGet]
         [Authorize]
-        public string HeloWorld()
+        public string HelloWorld()
         {
             return "Hello " + Members.GetCurrentMember()?.Name;
         }

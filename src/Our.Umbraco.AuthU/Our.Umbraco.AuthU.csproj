@@ -266,7 +266,7 @@
     <Compile Include="OAuthConstants.cs" />
     <Compile Include="OAuthContext.cs" />
     <Compile Include="Services\MembershipProviderOAuthUserService.cs" />
-    <Compile Include="Web\BaseOAuthAttribute.cs" />
+    <Compile Include="Web\Helpers\PrincipalHelper.cs" />
     <Compile Include="Web\Mvc\AddOAuthChallengeResult.cs" />
     <Compile Include="Web\Mvc\OAuthAttribute.cs" />
     <Compile Include="Data\UmbracoDbOAuthRefreshTokenStore.cs" />

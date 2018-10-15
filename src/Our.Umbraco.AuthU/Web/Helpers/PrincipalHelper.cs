@@ -1,26 +1,12 @@
-﻿using System;
+﻿using Our.Umbraco.AuthU.Interfaces;
 using System.Linq;
 using System.Security.Claims;
 
-namespace Our.Umbraco.AuthU.Web
+namespace Our.Umbraco.AuthU.Web.Helpers
 {
-    public class BaseOAuthAttribute : Attribute
+    internal static class PrincipalHelper
     {
-        public string Realm { get; set; }
-
-        protected OAuthContext Context { get; }
-
-        public BaseOAuthAttribute()
-            : this(OAuth.DefaultRealm)
-        { }
-
-        public BaseOAuthAttribute(string realm)
-        {
-            Realm = realm;
-            Context = OAuth.GetContext(Realm);
-        }
-
-        protected bool ValidatePrincipal(ClaimsPrincipal principal)
+        public static bool ValidatePrincipal(ClaimsPrincipal principal, string targetRealm, IOAuthUserService userService)
         {
             // Make sure principal isn't null
             if (principal == null)
@@ -32,7 +18,7 @@ namespace Our.Umbraco.AuthU.Web
 
             // Make sure principal belongs to realm
             var realm = principal.Claims.FirstOrDefault(x => x.Type == OAuth.ClaimTypes.Realm)?.Value;
-            if (realm == null || realm != Realm)
+            if (realm == null || realm != targetRealm)
                 return false;
 
             // Make sure username is present
@@ -41,7 +27,7 @@ namespace Our.Umbraco.AuthU.Web
                 return false;
 
             // Make sure username is valid
-            if (!Context.Services.UserService.ValidateUser(username))
+            if (!userService.ValidateUser(username))
                 return false;
 
             return true;
