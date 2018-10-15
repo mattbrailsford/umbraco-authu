@@ -58,9 +58,7 @@ namespace Our.Umbraco.AuthU.Services
 					ClockSkew = TimeSpan.Zero
                 };
 
-                SecurityToken securityToken;
-
-                var principal = tokenHandler.ValidateToken(token, validationParameters, out securityToken);
+                var principal = tokenHandler.ValidateToken(token, validationParameters, out SecurityToken securityToken);
 
                 return principal;
             }
