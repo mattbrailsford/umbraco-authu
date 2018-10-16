@@ -34,7 +34,7 @@ For the most basic OAuth implementation, the following minimal configuration is 
 This will create an endpoint at the path `/oauth/token`, authenticating requests against the Umbraco members store, issuing access tokens with a lifespan of 20 minutes.
 
 ### Advanced Configuration
-For a more advanced OAuth implementation, the following conifguration shows all the supported options.
+For a more advanced OAuth implementation, the following configuration shows all the supported options.
 ````csharp 
     OAuth.ConfigureEndpoint("realm", "/oauth/token", new OAuthOptions {
         UserService = new UmbracoMembersOAuthUserService(),
@@ -52,7 +52,7 @@ This will create an endpoint the same as the basic configuration with added supp
 ### Configuration Options
 * __Realm : string__   
   _[optional, default:"default"]_  
-  A uniqie alias for the configuration, allowing you to configure multiple endpoints.
+  A unique alias for the configuration, allowing you to configure multiple endpoints.
 * __Path : string__  
   _[optional, default:"/oauth/token"]_  
   The path of the endpoint (__IMPORTANT!__ Be sure to add the base of the path to the `umbracoReservedPaths` app setting, ie `~/oauth/`)
@@ -61,7 +61,7 @@ This will create an endpoint the same as the basic configuration with added supp
   The service from which to validate authentication requests against. Out of the box AuthU comes with 2 implementations, `UmbracoMembersOAuthUserService` and `UmbracoUsersOAuthUserService` which authenticate against the Umbraco members and users store respectively. Custom sources can be configured by implementing the `IOAuthUserService` interface yourself.
 * __SymmetricKey : string__  
   _[required]_  
-  A symetric key used to sign the generated access tokens. Must be a string, 32 characters long, BASE64 encoded.
+  A symmetric key used to sign the generated access tokens. Must be a string, 32 characters long, BASE64 encoded.
 * __AccessTokenLifeTime : int__  
   _[optional, default:20]_  
   Sets the lifespan, in minutes, of an access token before re-authentication is required. Should be short lived.
@@ -168,6 +168,6 @@ Anyone and everyone is welcome to contribute. Please take a moment to review the
 
 ## License
 
-Copyright &copy; 2017 Matt Brialsford, Outfield Digital Ltd 
+Copyright &copy; 2017 Matt Brailsford, Outfield Digital Ltd 
 
 Licensed under the [MIT License](LICENSE.md)
