@@ -89,6 +89,7 @@ With an endpoint configured, initial authentication can be performed by sending 
 * __password__ = The users password
 * __client_id__ = A valid client id (Only required if a client store is configured)
 * __client_secret__ = A valid client secret (Only required if a client store is configured, and the client is "secure")
+* __device_id__ = An optional device id to associate the token with, allowing login from multiple devices
 
 Example (with client store and refresh token stores configured):
 
@@ -97,7 +98,7 @@ Example (with client store and refresh token stores configured):
     Request Headers:
       Content-Type: application/x-www-form-urlencoded
     Request POST Body:
-      grant_type=password&username=joebloggs&password=password1234&client_id=myclient&client_secret=myclientsecret
+      grant_type=password&username=joebloggs&password=password1234&client_id=myclient&client_secret=myclientsecret&device_id=edfb6f01-2342-47f8-a5ee-a520969539d0
     Response:
     {
       "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJuYW1laWQiOiIxMDgxIiwidW5pcXVlX25hbWUiOiJtZW1iZXIiLCJyb2xlIjoiTWVtYmVyIiwicmVhbG0iOiJkZWZhdWx0IiwiZXhwIjoxNDg3NDk2NzM3LCJuYmYiOjE0ODc0OTU1Mzd9.9uiIxrPggvH5nyLbH4UKIL52V6l5mpOyJ26J12FkXvI",
@@ -111,6 +112,7 @@ A subsequent refresh token authentication request can be performed by sending a 
 * __refresh_token__ = The refresh token returned from the original authentication request
 * __client_id__ = A valid client id (Only required if a client store is configured)
 * __client_secret__ = A valid client secret (Only required if a client store is configured, and the client is "secure")
+* __device_id__ = An optional device id to associate the token with, allowing login from multiple devices
 
 Example (with client store and refresh token stores configured):
 
@@ -119,7 +121,7 @@ Example (with client store and refresh token stores configured):
     Request Headers:
       Content-Type: application/x-www-form-urlencoded
     Request POST Body:
-      grant_type=refresh_token&refresh_token=b3cc9c66b86340c5b743f2a7cec9d2f1&client_id=myclient&client_secret=myclientsecret
+      grant_type=refresh_token&refresh_token=b3cc9c66b86340c5b743f2a7cec9d2f1&client_id=myclient&client_secret=myclientsecret&device_id=edfb6f01-2342-47f8-a5ee-a520969539d0
     Response:
     {
       "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJuYW1laWQiOiIxMDgxIiwidW5pcXVlX25hbWUiOiJtZW1iZXIiLCJyb2xlIjoiTWVtYmVyIiwicmVhbG0iOiJkZWZhdWx0IiwiZXhwIjoxNDg3NDk2NzM3LCJuYmYiOjE0ODc0OTU1Mzd9.9uiIxrPggvH5nyLbH4UKIL52V6l5mpOyJ26J12FkXvI",
