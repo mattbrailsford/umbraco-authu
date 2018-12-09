@@ -147,7 +147,7 @@ With your endpoint working and issuing tokens, you can protect your API controll
 The `OAuth` attribute has a single optional parameter, `Realm`, which allows you to define which realm this controller is associated with. If a realm is configured, only access tokens that were generated from the associated endpoint will be valid.
 
 ### Accessing Protected Actions
-To access a protected action, an `Authorization` header should be added to the request with a value of `Bearer {access_token}` were `{access_token}` is the value of the access token requested from the authentication endpoint.
+To access a protected action, an `Authorization` header should be added to the request with a value of `Bearer {access_token}` where `{access_token}` is the value of the access token requested from the authentication endpoint.
 
 Example:
 
@@ -168,6 +168,6 @@ Anyone and everyone is welcome to contribute. Please take a moment to review the
 
 ## License
 
-Copyright &copy; 2017 Matt Brialsford, Outfield Digital Ltd 
+Copyright &copy; 2018 Matt Brialsford, Outfield Digital Ltd 
 
 Licensed under the [MIT License](LICENSE.md)
