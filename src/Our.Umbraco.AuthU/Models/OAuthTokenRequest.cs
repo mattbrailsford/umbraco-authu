@@ -12,6 +12,8 @@
 
         public string client_secret { get; set; }
 
-        public string refresh_token { get; set; }
+		public string device_id { get; set; }
+
+		public string refresh_token { get; set; }
     }
 }

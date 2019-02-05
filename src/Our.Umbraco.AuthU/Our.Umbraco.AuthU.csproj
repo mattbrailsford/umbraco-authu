@@ -259,6 +259,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Data\InMemoryOAuthClientStore.cs" />
+    <Compile Include="Data\Migrations\BaseMigration.cs" />
+    <Compile Include="Data\Migrations\MigrationsRunner.cs" />
+    <Compile Include="Data\Migrations\UmbracoDbOAuthClientStore\1.0.0\CreateDemoClient.cs" />
+    <Compile Include="Data\Migrations\UmbracoDbOAuthClientStore\1.0.0\CreateTable.cs" />
+    <Compile Include="Data\Migrations\UmbracoDbOAuthRefreshTokenStore\1.0.0\CreateTable.cs" />
+    <Compile Include="Data\Migrations\UmbracoDbOAuthRefreshTokenStore\1.0.1\AddDeviceIdColumn.cs" />
     <Compile Include="Data\UmbracoDbOAuthClientStore.cs" />
     <Compile Include="Interfaces\IOAuthOptions.cs" />
     <Compile Include="Interfaces\IOAuthClientStore.cs" />
