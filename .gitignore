@@ -249,4 +249,5 @@ Cached/
 # Custom
 build/_nuget
 src/Our.Umbraco.AuthU.TestHarness
+src/Our.Umbraco.AuthU.Web
 src/Our.Umbraco.AuthU.Matt.*

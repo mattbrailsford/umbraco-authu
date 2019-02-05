@@ -6,6 +6,7 @@ using System.Web.Http;
 using Our.Umbraco.AuthU.Extensions;
 using Our.Umbraco.AuthU.Models;
 using System.Linq;
+using Umbraco.Core;
 
 namespace Our.Umbraco.AuthU.Web.Controllers
 {
@@ -28,11 +29,14 @@ namespace Our.Umbraco.AuthU.Web.Controllers
 
         protected OAuthClient Client { get; private set; }
 
-        [HttpPost]
+		[HttpPost]
         public object Token(OAuthTokenRequest request)
         {
             if (!Context.Options.AllowInsecureHttp && Request.RequestUri.Scheme != Uri.UriSchemeHttps)
                 throw new OAuthResponseException(HttpStatusCode.UpgradeRequired, new { invalid_scheme = "Requests must be made over HTTPS" });
+
+            if (request == null)
+                throw new OAuthResponseException(HttpStatusCode.BadRequest, new { invalid_request = "Invalid request, please make sure to post request data as application/x-www-form-urlencoded" });
 
             ProcessClient(request);
 
@@ -77,11 +81,15 @@ namespace Our.Umbraco.AuthU.Web.Controllers
                 Client = client;
             }
         }
-	
+
 		protected void SetAllowedOriginHeader()
 		{
 			string AccessControlAllowOriginHeaderKey = "Access-Control-Allow-Origin";
 			string allowedOrigin = Client != null ? Client.AllowedOrigin : Context.Options.AllowedOrigin;
+
+			// If there is no allowed origin defined, just skip it
+			if (string.IsNullOrEmpty(allowedOrigin))
+				return;
 
 			if (HttpContext.Current.Response.Headers.AllKeys.Contains(AccessControlAllowOriginHeaderKey))
 			{
@@ -101,10 +109,14 @@ namespace Our.Umbraco.AuthU.Web.Controllers
 
         protected object ProcessPasswordTokenRequest(OAuthTokenRequest request)
         {
-            // Validate the user
-            if (Context.Services.UserService.ValidateUser(request.username, request.password))
+			// Make sure we have a username and password
+			if (string.IsNullOrWhiteSpace(request.username) || string.IsNullOrWhiteSpace(request.password))
+				throw new OAuthResponseException(HttpStatusCode.BadRequest, new { invalid_grant = "No username and/or password provided" });
+
+			// Validate the user
+			if (Context.Services.UserService.ValidateUser(request.username, request.password))
             {
-                return ProcessUsernameRequest(request.username);
+                return GenerateTokenResponse(request.username, request.device_id);
             }
 
             throw new OAuthResponseException(HttpStatusCode.Unauthorized, new { invalid_grant = "The username and/or password is incorrect" });
@@ -112,12 +124,16 @@ namespace Our.Umbraco.AuthU.Web.Controllers
 
         protected object ProcessRefreshTokenRequest(OAuthTokenRequest request)
         {
-            // Don't do anything if we don't have a token store registered
-            if (Context.Services.RefreshTokenStore == null)
+			// Make sure we have refresh token
+			if (string.IsNullOrWhiteSpace(request.refresh_token))
+				throw new OAuthResponseException(HttpStatusCode.BadRequest, new { invalid_refreshToken = "No refresh token provided" });
+
+			// Don't do anything if we don't have a token store registered
+			if (Context.Services.RefreshTokenStore == null)
                 throw new OAuthResponseException(HttpStatusCode.BadRequest, new { invalid_refreshToken = "A refresh token store is not registered in the system" });
 
-            // Lookup the refresh token
-            var key = request.refresh_token.GenerateHash();
+			// Lookup the refresh token
+			var key = request.refresh_token.GenerateHash();
             var token = Context.Services.RefreshTokenStore.FindRefreshToken(key);
             if (token != null)
             {
@@ -130,13 +146,16 @@ namespace Our.Umbraco.AuthU.Web.Controllers
                 if (token.Realm != Context.Realm)
                     throw new OAuthResponseException(HttpStatusCode.Unauthorized, new { invalid_realm = "Refresh token is issued to a different realm" });
 
-                return ProcessUsernameRequest(token.Subject);
+				if (!token.DeviceId.IsNullOrWhiteSpace() && token.DeviceId != request.device_id)
+					throw new OAuthResponseException(HttpStatusCode.Unauthorized, new { invalid_deviceId = "Refresh token is associated with a different device" });
+
+				return GenerateTokenResponse(token.Subject, token.DeviceId);
             }
 
             throw new OAuthResponseException(HttpStatusCode.Unauthorized, new { invalid_refreshToken = $"Refresh token {request.refresh_token} not found" });
         }
 
-        protected object ProcessUsernameRequest(string username)
+        protected OAuthTokenResponse GenerateTokenResponse(string username, string deviceId)
         {
             // Construct an identity
             var claims = Context.Services.UserService.GetUserClaims(username);
@@ -144,7 +163,13 @@ namespace Our.Umbraco.AuthU.Web.Controllers
             var identity = new ClaimsIdentity("OAuth");
             identity.AddClaim(new Claim(ClaimTypes.Name, username));
             identity.AddClaim(new Claim(OAuth.ClaimTypes.Realm, Context.Realm));
-            identity.AddClaims(claims);
+
+			if (!deviceId.IsNullOrWhiteSpace())
+			{
+				identity.AddClaim(new Claim(OAuth.ClaimTypes.DeviceId, deviceId));
+			}
+
+			identity.AddClaims(claims);
 
             var response = new OAuthTokenResponse
             {
@@ -166,6 +191,7 @@ namespace Our.Umbraco.AuthU.Web.Controllers
                     UserType = Context.Services.UserService.UserType,
                     Realm = Context.Realm,
                     ClientId = Client != null ? Client.ClientId : OAuth.DefaultClientId,
+					DeviceId = deviceId.IsNullOrWhiteSpace() ? null : deviceId,
                     IssuedUtc = DateTime.UtcNow,
                     ExpiresUtc = DateTime.UtcNow.AddMinutes(refreshTokenLifeTime),
                     ProtectedTicket = response.SerializeToJson().Encrypt(Context.Options.SymmetricKey)

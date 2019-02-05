@@ -25,7 +25,10 @@ namespace Our.Umbraco.AuthU.Models
         [NullSetting(NullSetting = NullSettings.NotNull)]
         public string ClientId { get; set; }
 
-        [NullSetting(NullSetting = NullSettings.NotNull)]
+		[NullSetting(NullSetting = NullSettings.Null)]
+		public string DeviceId { get; set; }
+
+		[NullSetting(NullSetting = NullSettings.NotNull)]
         public DateTime IssuedUtc { get; set; }
 
         [NullSetting(NullSetting = NullSettings.NotNull)]

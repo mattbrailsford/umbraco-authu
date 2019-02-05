@@ -11,6 +11,7 @@
         internal static class ClaimTypes
         {
             internal static readonly string Realm = "realm";
-        }
+			internal static readonly string DeviceId = "deviceid";
+		}
     }
 }

@@ -1,9 +1,9 @@
 ﻿using System;
-using System.IdentityModel.Protocols.WSTrust;
-using System.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
+using Microsoft.IdentityModel.Tokens;
 using System.Security.Claims;
 using Our.Umbraco.AuthU.Interfaces;
-
+ 
 namespace Our.Umbraco.AuthU.Services
 {
     public class JwtTokenService : IOAuthTokenService
@@ -21,16 +21,18 @@ namespace Our.Umbraco.AuthU.Services
             var tokenHandler = new JwtSecurityTokenHandler();
 
             var now = DateTime.UtcNow;
-            var tokenDescriptor = new SecurityTokenDescriptor
-            {
-                Subject = identity,
-                Lifetime = new Lifetime(now, now.AddMinutes(expireMinutes)),
-                SigningCredentials = new SigningCredentials(new InMemorySymmetricSecurityKey(symmetricKey), 
-                    SecurityAlgorithms.HmacSha256Signature,
-                    SecurityAlgorithms.Sha256Digest)
-            };
-            
-            var stoken = tokenHandler.CreateToken(tokenDescriptor);
+			var tokenDescriptor = new SecurityTokenDescriptor
+			{
+				Subject = identity,
+				IssuedAt = now,
+				NotBefore = now,
+				Expires = now.AddMinutes(expireMinutes),
+				SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(symmetricKey),
+					SecurityAlgorithms.HmacSha256Signature,
+					SecurityAlgorithms.Sha256Digest)
+			};
+
+			var stoken = tokenHandler.CreateToken(tokenDescriptor);
             var token = tokenHandler.WriteToken(stoken);
 
             return token;
@@ -52,12 +54,11 @@ namespace Our.Umbraco.AuthU.Services
                     RequireExpirationTime = true,
                     ValidateIssuer = false,
                     ValidateAudience = false,
-                    IssuerSigningKey = new InMemorySymmetricSecurityKey(symmetricKey)
+                    IssuerSigningKey = new SymmetricSecurityKey(symmetricKey),
+					ClockSkew = TimeSpan.Zero
                 };
 
-                SecurityToken securityToken;
-
-                var principal = tokenHandler.ValidateToken(token, validationParameters, out securityToken);
+                var principal = tokenHandler.ValidateToken(token, validationParameters, out SecurityToken securityToken);
 
                 return principal;
             }

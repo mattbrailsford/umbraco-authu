@@ -16,8 +16,7 @@
 		<language></language>
 		<tags></tags>
 		<dependencies>
-  			<dependency id="UmbracoCms.Core" version="7.5.0" />
-			<dependency id="System.IdentityModel.Tokens.Jwt" version="4.0.4.402070948" />
+			<dependency id="System.IdentityModel.Tokens.Jwt" version="5.2.4" />
 		</dependencies>
 	</metadata>
 	<files />

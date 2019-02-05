@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Our.Umbraco.AuthU.Web.Helpers;
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Web.Http.Filters;
@@ -6,16 +7,23 @@ using System.Web.Http.Filters;
 namespace Our.Umbraco.AuthU.Web.WebApi
 {
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method)]
-    public class OAuthAttribute : BaseOAuthAttribute, IAuthenticationFilter
+    public class OAuthAttribute : Attribute, IAuthenticationFilter
     {
         public bool AllowMultiple => false;
 
+        public string Realm { get; set; }
+
+        protected OAuthContext Context { get; }
+
         public OAuthAttribute()
+            : this(OAuth.DefaultRealm)
         { }
 
         public OAuthAttribute(string realm)
-            : base(realm)
-        { }
+        {
+            Realm = realm;
+            Context = OAuth.GetContext(Realm);
+        }
 
         public async Task AuthenticateAsync(HttpAuthenticationContext context, CancellationToken cancellationToken)
         {
@@ -32,7 +40,7 @@ namespace Our.Umbraco.AuthU.Web.WebApi
                 return;
 
             // Validate the principal
-            if (!ValidatePrincipal(principal))
+            if (!PrincipalHelper.ValidatePrincipal(principal, Realm, Context.Services.UserService))
                 return; 
 
             // Set the current principal
