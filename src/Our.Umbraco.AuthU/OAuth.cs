@@ -21,7 +21,7 @@ namespace Our.Umbraco.AuthU
                 return config;
             }
 
-            throw new Exception($"And endpoint for the realm \"{realm}\" has not yet been configured. Please call ConfigureEndpoint first.");
+            throw new Exception($"An endpoint for the realm \"{realm}\" has not yet been configured. Please call ConfigureEndpoint first.");
         }
 
         public static void ConfigureEndpoint(OAuthOptions config)
