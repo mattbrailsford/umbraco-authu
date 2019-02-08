@@ -13,18 +13,18 @@ namespace Our.Umbraco.AuthU.Services
 
         protected MembershipProvider MemberProvider => Membership.Providers[this.MembershipProviderName];
 
-        public bool ValidateUser(string username)
+        public virtual bool ValidateUser(string username)
         {
             var user = this.MemberProvider.GetUser(username, false);
             return user != null && user.IsApproved && !user.IsLockedOut;
         }
 
-        public bool ValidateUser(string username, string password)
+        public virtual bool ValidateUser(string username, string password)
         {
             return this.MemberProvider.ValidateUser(username, password);
         }
 
-        public IEnumerable<Claim> GetUserClaims(string username)
+        public virtual IEnumerable<Claim> GetUserClaims(string username)
         {
             var member = this.MemberProvider.GetUser(username, true);
             if (member != null)
