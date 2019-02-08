@@ -6,23 +6,23 @@ using System.Web.Http.Filters;
 
 namespace Our.Umbraco.AuthU.Web.WebApi
 {
-    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method)]
+    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, AllowMultiple = false)]
     public class OAuthAttribute : Attribute, IAuthenticationFilter
     {
         public bool AllowMultiple => false;
 
-        public string Realm { get; set; }
+        public string Realm { get; set; } = OAuth.DefaultRealm;
 
-        protected OAuthContext Context { get; }
+        protected OAuthContext Context {
+            get { return OAuth.GetContext(Realm); }
+        }
 
         public OAuthAttribute()
-            : this(OAuth.DefaultRealm)
         { }
 
         public OAuthAttribute(string realm)
         {
             Realm = realm;
-            Context = OAuth.GetContext(Realm);
         }
 
         public async Task AuthenticateAsync(HttpAuthenticationContext context, CancellationToken cancellationToken)

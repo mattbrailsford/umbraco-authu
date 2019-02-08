@@ -6,21 +6,18 @@ using System.Web.Mvc.Filters;
 
 namespace Our.Umbraco.AuthU.Web.Mvc
 {
-    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method)]
+    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, AllowMultiple = false)]
     public class OAuthAttribute : ActionFilterAttribute, IAuthenticationFilter
     {
-        public string Realm { get; set; }
+        public string Realm { get; set; } = OAuth.DefaultRealm;
 
-        protected OAuthContext Context { get; }
-
-        public OAuthAttribute()
-            : this(OAuth.DefaultRealm)
-        { }
+        protected OAuthContext Context {
+            get { return OAuth.GetContext(Realm); }
+        }
 
         public OAuthAttribute(string realm)
         {
             Realm = realm;
-            Context = OAuth.GetContext(Realm);
         }
 
         public void OnAuthentication(AuthenticationContext filterContext)
