@@ -43,7 +43,7 @@ namespace Our.Umbraco.AuthU.Web.Mvc
                 // Set the current principal
                 filterContext.Principal = principal;
             }
-            catch(FormatException ex)
+            catch (FormatException ex)
             {
                 return;
             }
