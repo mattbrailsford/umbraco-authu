@@ -160,6 +160,9 @@ Example:
     Response:
     "Hello Joe"
 
+### Using javascript
+Presist and refreshing the token can be cumbersome. If you are using javascript you can use this small helper to handle and refreshing the token etc: (https://github.com/tobbbe/tauth)[https://github.com/tobbbe/tauth]
+
 ## Contributing To This Project
 
 Anyone and everyone is welcome to contribute. Please take a moment to review the [guidelines for contributing](CONTRIBUTING.md).
