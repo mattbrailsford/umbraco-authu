@@ -1,10 +1,12 @@
-﻿using System;
+﻿using NPoco;
+using System;
 using Umbraco.Core.Persistence;
 using Umbraco.Core.Persistence.DatabaseAnnotations;
 
 namespace Our.Umbraco.AuthU.Models
 {
     [PrimaryKey("Id")]
+    [TableName("OAuthRefreshToken")]
     public class OAuthRefreshToken
     {
         [PrimaryKeyColumn]

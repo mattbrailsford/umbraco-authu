@@ -1,8 +1,6 @@
-﻿using Umbraco.Core;
-using Umbraco.Core.Persistence;
-using Our.Umbraco.AuthU.Interfaces;
+﻿using Our.Umbraco.AuthU.Interfaces;
 using Our.Umbraco.AuthU.Models;
-using Our.Umbraco.AuthU.Data.Migrations;
+using NPoco;
 
 namespace Our.Umbraco.AuthU.Data
 {
@@ -11,12 +9,7 @@ namespace Our.Umbraco.AuthU.Data
 		internal const string CurrentVersion = "1.0.1";
 		internal const string SubProductName = "AuthU_UmbracoDbOAuthRefreshTokenStore";
 
-		protected Database Db => ApplicationContext.Current.DatabaseContext.Database;
-
-        public UmbracoDbOAuthRefreshTokenStore()
-        {
-			MigrationsRunner.RunMigrations(CurrentVersion, SubProductName);
-		}
+        protected Database Db => new Database("umbracoDbDsn");
 
         public void AddRefreshToken(OAuthRefreshToken token)
         {
