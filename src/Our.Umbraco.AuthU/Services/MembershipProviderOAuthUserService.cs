@@ -40,21 +40,24 @@ namespace Our.Umbraco.AuthU.Services
 
         public IEnumerable<Claim> GetUserClaims(string username)
         {
+            MembershipUser member = null;
+            
             try
             {
-                var member = this.MemberProvider.GetUser(username, true);
-                if (member != null)
-                {
-                    yield return new Claim(ClaimTypes.NameIdentifier, member.ProviderUserKey.ToString());
-
-                    var roles = Roles.GetRolesForUser(member.UserName);
-                    foreach (var role in roles)
-                    {
-                        yield return new Claim(ClaimTypes.Role, role);
-                    }
-                }
+                member = this.MemberProvider.GetUser(username, true);
             }
             catch {}
+            
+            if (member != null)
+            {
+                yield return new Claim(ClaimTypes.NameIdentifier, member.ProviderUserKey.ToString());
+
+                var roles = Roles.GetRolesForUser(member.UserName);
+                foreach (var role in roles)
+                {
+                    yield return new Claim(ClaimTypes.Role, role);
+                }
+            }
         }
     }
 }
