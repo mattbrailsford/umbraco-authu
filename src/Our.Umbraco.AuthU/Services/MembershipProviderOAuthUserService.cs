@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Security.Claims;
 using System.Web.Security;
 using Our.Umbraco.AuthU.Interfaces;
@@ -13,30 +13,48 @@ namespace Our.Umbraco.AuthU.Services
 
         protected MembershipProvider MemberProvider => Membership.Providers[this.MembershipProviderName];
 
-        public virtual bool ValidateUser(string username)
+        public bool ValidateUser(string username)
         {
-            var user = this.MemberProvider.GetUser(username, false);
-            return user != null && user.IsApproved && !user.IsLockedOut;
-        }
-
-        public virtual bool ValidateUser(string username, string password)
-        {
-            return this.MemberProvider.ValidateUser(username, password);
-        }
-
-        public virtual IEnumerable<Claim> GetUserClaims(string username)
-        {
-            var member = this.MemberProvider.GetUser(username, true);
-            if (member != null)
+            try 
             {
-                yield return new Claim(ClaimTypes.NameIdentifier, member.ProviderUserKey.ToString());
+                var user = this.MemberProvider.GetUser(username, false);
+                return user != null && user.IsApproved && !user.IsLockedOut;
+            }
+            catch 
+            {
+                return false;
+            }
+        }
 
-                var roles = Roles.GetRolesForUser(member.UserName);
-                foreach (var role in roles)
+        public bool ValidateUser(string username, string password)
+        {
+            try
+            {
+                return this.MemberProvider.ValidateUser(username, password);
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public IEnumerable<Claim> GetUserClaims(string username)
+        {
+            try
+            {
+                var member = this.MemberProvider.GetUser(username, true);
+                if (member != null)
                 {
-                    yield return new Claim(ClaimTypes.Role, role);
+                    yield return new Claim(ClaimTypes.NameIdentifier, member.ProviderUserKey.ToString());
+
+                    var roles = Roles.GetRolesForUser(member.UserName);
+                    foreach (var role in roles)
+                    {
+                        yield return new Claim(ClaimTypes.Role, role);
+                    }
                 }
             }
+            catch {}
         }
     }
 }
