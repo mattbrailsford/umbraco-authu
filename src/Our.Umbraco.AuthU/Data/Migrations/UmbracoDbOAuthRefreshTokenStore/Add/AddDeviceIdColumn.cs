@@ -6,9 +6,9 @@ namespace Our.Umbraco.AuthU.Data.Migrations.UmbracoDbOAuthRefreshTokenStore
     /// Simple migration to create the DeviceId column on the OAuthRefreshToken Table
     /// </summary>
     internal class AddDeviceIdColumn : MigrationBase
-	{
-		public AddDeviceIdColumn(IMigrationContext context) : base(context)
-		{ }
+    {
+        public AddDeviceIdColumn(IMigrationContext context) : base(context)
+        { }
 
         public override void Migrate()
         {
@@ -18,5 +18,5 @@ namespace Our.Umbraco.AuthU.Data.Migrations.UmbracoDbOAuthRefreshTokenStore
             }
         }
 
-	}
+    }
 }
