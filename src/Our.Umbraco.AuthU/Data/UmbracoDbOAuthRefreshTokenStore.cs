@@ -1,38 +1,50 @@
 ﻿using Our.Umbraco.AuthU.Interfaces;
 using Our.Umbraco.AuthU.Models;
-using NPoco;
+using Umbraco.Core.Scoping;
 
 namespace Our.Umbraco.AuthU.Data
 {
     public class UmbracoDbOAuthRefreshTokenStore : IOAuthRefreshTokenStore
-	{
-		internal const string CurrentVersion = "1.0.1";
-		internal const string SubProductName = "AuthU_UmbracoDbOAuthRefreshTokenStore";
+    {
+        internal const string CurrentVersion = "1.0.1";
+        internal const string SubProductName = "AuthU_UmbracoDbOAuthRefreshTokenStore";
 
-        protected Database Db => new Database("umbracoDbDsn");
+        private readonly IScopeProvider _scopeProvider;
+
+        public UmbracoDbOAuthRefreshTokenStore(IScopeProvider scopeProvider)
+        {
+            _scopeProvider = scopeProvider;
+        }
 
         public void AddRefreshToken(OAuthRefreshToken token)
         {
-            Db.Execute("DELETE FROM [OAuthRefreshToken] WHERE [Subject] = @0 AND [UserType] = @1 AND [Realm] = @2 AND [ClientId] = @3 AND [DeviceId] = @4",
+            using (var scope = _scopeProvider.CreateScope(autoComplete: true))
+            {
+                scope.Database.Execute("DELETE FROM [OAuthRefreshToken] WHERE [Subject] = @0 AND [UserType] = @1 AND [Realm] = @2 AND [ClientId] = @3 AND [DeviceId] = @4",
                 token.Subject,
                 token.UserType,
                 token.Realm,
                 token.ClientId,
-				token.DeviceId);
+                token.DeviceId);
 
-            Db.Save(token);
+                scope.Database.Save(token);
+            }
         }
 
         public void RemoveRefreshToken(string refreshTokenId)
         {
-            Db.Execute("DELETE FROM [OAuthRefreshToken] WHERE [Key] = @0",
-                refreshTokenId);
+            using (var scope = _scopeProvider.CreateScope(autoComplete: true))
+            {
+                scope.Database.Execute("DELETE FROM [OAuthRefreshToken] WHERE [Key] = @0", refreshTokenId);
+            }
         }
 
         public OAuthRefreshToken FindRefreshToken(string refreshTokenId)
         {
-            return Db.SingleOrDefault<OAuthRefreshToken>("SELECT * FROM [OAuthRefreshToken] WHERE [Key] = @0",
-                refreshTokenId);
+            using (var scope = _scopeProvider.CreateScope(autoComplete: true))
+            {
+                return scope.Database.SingleOrDefault<OAuthRefreshToken>("SELECT * FROM [OAuthRefreshToken] WHERE [Key] = @0", refreshTokenId);
+            }
         }
     }
 }

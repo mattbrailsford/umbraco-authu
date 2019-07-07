@@ -254,8 +254,8 @@
     <Compile Include="Data\Plans\RemoveOAuthTables.cs" />
     <Compile Include="Data\Plans\RegisterOAuthTables.cs" />
     <Compile Include="Component\MigrationsRunnerComponent.cs" />
-    <Compile Include="Data\Migrations\UmbracoDbOAuthClientStore\Add\CreateDemoClient.cs" />
-    <Compile Include="Data\Migrations\UmbracoDbOAuthClientStore\Add\CreateAuthClientStoreTable.cs" />
+    <Compile Include="Data\Migrations\UmbracoDbOAuthClientStore\CreateDemoClient.cs" />
+    <Compile Include="Data\Migrations\UmbracoDbOAuthClientStore\CreateAuthClientStoreTable.cs" />
     <Compile Include="Data\Migrations\UmbracoDbOAuthClientStore\Remove\DeleteAuthClientStoreTable.cs" />
     <Compile Include="Data\Migrations\UmbracoDbOAuthRefreshTokenStore\Add\CreateAuthRefreshTokenStoreTable.cs" />
     <Compile Include="Data\Migrations\UmbracoDbOAuthRefreshTokenStore\Add\AddDeviceIdColumn.cs" />
