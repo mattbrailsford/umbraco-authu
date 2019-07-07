@@ -35,9 +35,6 @@ namespace Our.Umbraco.AuthU.Component
                 //Create the oAuth tables
                 var upgrader = new Upgrader(new RegisterOAuthTables());
 
-                //Run this plan to remove the oAuth tables, there may be a better way to do this?
-                //var upgrader = new Upgrader(new RemoveOAuthTables());
-
                 upgrader.Execute(_scopeProvider, _migrationBuilder, _keyValueService, _logger);
             }
             catch (Exception e)
