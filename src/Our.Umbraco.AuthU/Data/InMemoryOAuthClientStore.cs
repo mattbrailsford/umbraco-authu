@@ -14,7 +14,7 @@ namespace Our.Umbraco.AuthU.Data
         {
             foreach (var client in clients)
             {
-                client.Secret = client.Secret.oAuthGenerateHash();
+                client.Secret = client.Secret.GenerateOAuthHash();
             }
 
             this._clients = clients;
