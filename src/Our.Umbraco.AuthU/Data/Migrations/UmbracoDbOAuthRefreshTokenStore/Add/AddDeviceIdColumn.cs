@@ -13,9 +13,7 @@ namespace Our.Umbraco.AuthU.Data.Migrations.UmbracoDbOAuthRefreshTokenStore
         public override void Migrate()
         {
             if (!ColumnExists("OAuthRefreshToken", "DeviceId"))
-            {
                 Alter.Table("OAuthRefreshToken").AddColumn("DeviceId").AsString().Nullable();
-            }
         }
 
     }
