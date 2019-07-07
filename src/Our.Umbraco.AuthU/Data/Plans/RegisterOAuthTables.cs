@@ -20,7 +20,6 @@ namespace Our.Umbraco.AuthU.Data.Migrations.Plans
         /// <param name="CreateDemoClient"></param>
         public RegisterOAuthTables(bool CreateDemoClient = false) : base("AuthU")
         {
-
             if (!CreateDemoClient)
             {
                 From(InitialState)
