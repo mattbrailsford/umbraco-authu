@@ -1,5 +1,4 @@
-﻿using Our.Umbraco.AuthU.Data.Helpers;
-using Our.Umbraco.AuthU.Data.Migrations.UmbracoDbOAuthClientStore;
+﻿using Our.Umbraco.AuthU.Data.Migrations.UmbracoDbOAuthClientStore;
 using Our.Umbraco.AuthU.Data.Migrations.UmbracoDbOAuthRefreshTokenStore;
 using Umbraco.Core.Migrations;
 
@@ -18,9 +17,9 @@ namespace Our.Umbraco.AuthU.Data.Migrations.Plans
         }
 
         /// <summary>
-        /// Using the helper methid to get the AuthU Key 'Umbraco.Core.Upgrader.State+AuthU' Value
+        /// Using the helper method to get the AuthU Key 'Umbraco.Core.Upgrader.State+AuthU' Value
         /// </summary>
-        public override string InitialState => AuthUKeyValueHelper.GetValue();
+        public override string InitialState => string.Empty;
     }
 
 
