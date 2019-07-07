@@ -13,7 +13,7 @@ namespace Our.Umbraco.AuthU.Data.Migrations.UmbracoDbOAuthClientStore
 
         public override void Migrate()
         {
-            var existing = Database.SingleOrDefault<OAuthClient>($"SELECT * FROM [OAuthClient] WHERE [ClientId] = @0", "DemoClient");
+            var existing = Database.SingleOrDefault<OAuthClient>($"SELECT 1 FROM [OAuthClient] WHERE [ClientId] = @0", "DemoClient");
             if (existing == null)
             {
                 Database.Save(new OAuthClient
