@@ -1,5 +1,4 @@
-﻿using Our.Umbraco.AuthU.Models;
-using Umbraco.Core.Migrations;
+﻿using Umbraco.Core.Migrations;
 
 namespace Our.Umbraco.AuthU.Data.Migrations.UmbracoDbOAuthClientStore
 {
