@@ -6,10 +6,10 @@ namespace Our.Umbraco.AuthU.Data.Migrations.UmbracoDbOAuthClientStore
     /// Simple migration to delete the OAuthClient Table
     /// </summary>
     internal class DeleteAuthClientStoreTable : MigrationBase
-	{
-		public DeleteAuthClientStoreTable(IMigrationContext context) 
-			: base(context)
-		{ }
+    {
+        public DeleteAuthClientStoreTable(IMigrationContext context)
+            : base(context)
+        { }
 
         public override void Migrate()
         {
