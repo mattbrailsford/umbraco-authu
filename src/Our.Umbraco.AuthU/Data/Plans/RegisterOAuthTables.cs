@@ -18,23 +18,13 @@ namespace Our.Umbraco.AuthU.Data.Migrations.Plans
         /// Add the demo id if preferred
         /// </summary>
         /// <param name="CreateDemoClient"></param>
-        public RegisterOAuthTables(bool CreateDemoClient = false) : base("AuthU")
+        public RegisterOAuthTables() : base("AuthU")
         {
-            if (!CreateDemoClient)
-            {
-                From(InitialState)
-                .To<CreateAuthClientStoreTable>("CreateAuthClientStoreTable")
-                .To<CreateAuthRefreshTokenStoreTable>("CreateAuthRefreshTokenStoreTable")
-                .To<AddDeviceIdColumn>("AddDeviceIdColumn");
-            }
-            else
-            {
-                From(InitialState)
-                .To<CreateAuthClientStoreTable>("CreateAuthClientStoreTable")
-                .To<CreateAuthRefreshTokenStoreTable>("CreateAuthRefreshTokenStoreTable")
-                .To<AddDeviceIdColumn>("AddDeviceIdColumn")
-                .To<CreateDemoClient>("CreateDemoClient");
-            }
+            From(InitialState)
+            .To<CreateAuthClientStoreTable>("CreateAuthClientStoreTable")
+            .To<CreateAuthRefreshTokenStoreTable>("CreateAuthRefreshTokenStoreTable")
+            .To<AddDeviceIdColumn>("AddDeviceIdColumn")
+            .To<CreateDemoClient>("CreateDemoClient");
         }
 
         /// <summary>
