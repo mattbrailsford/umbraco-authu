@@ -7,7 +7,7 @@ using Umbraco.Core.Scoping;
 using Umbraco.Core.Services;
 using Our.Umbraco.AuthU.Data.Migrations;
 
-namespace Our.Umbraco.AuthU.Component
+namespace Our.Umbraco.AuthU.Composing
 {
     /// <summary>
     /// This creates a component we can register as umbraco 8 starts up

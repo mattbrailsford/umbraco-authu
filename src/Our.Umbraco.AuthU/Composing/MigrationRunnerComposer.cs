@@ -1,8 +1,7 @@
-﻿using Our.Umbraco.AuthU.Component;
-using Umbraco.Core;
+﻿using Umbraco.Core;
 using Umbraco.Core.Composing;
 
-namespace Our.Umbraco.AuthU.Composer
+namespace Our.Umbraco.AuthU.Composing
 {
     /// <summary>
     /// This class registers components at umbraco start up.
