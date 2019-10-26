@@ -1,14 +1,14 @@
 ﻿using Our.Umbraco.AuthU.Models;
 using Umbraco.Core.Migrations;
 
-namespace Our.Umbraco.AuthU.Data.Migrations.UmbracoDbOAuthClientStore
+namespace Our.Umbraco.AuthU.Data.Migrations
 {
     /// <summary>
     /// Simple migration to add a demo client to the OAuthClient Table
     /// </summary>
-    internal class CreateDemoClient : MigrationBase
+    internal class CreateDemoOAuthClient : MigrationBase
     {
-        public CreateDemoClient(IMigrationContext context) : base(context)
+        public CreateDemoOAuthClient(IMigrationContext context) : base(context)
         { }
 
         public override void Migrate()

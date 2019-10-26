@@ -5,7 +5,7 @@ using Umbraco.Core.Composing;
 using Umbraco.Core.Migrations.Upgrade;
 using Umbraco.Core.Scoping;
 using Umbraco.Core.Services;
-using Our.Umbraco.AuthU.Data.Migrations.Plans;
+using Our.Umbraco.AuthU.Data.Migrations;
 
 namespace Our.Umbraco.AuthU.Component
 {
@@ -32,8 +32,8 @@ namespace Our.Umbraco.AuthU.Component
         {
             try
             {
-                //Create the oAuth tables
-                var upgrader = new Upgrader(new RegisterOAuthTables());
+                var plan = new AuthUMigrationPlan();
+                var upgrader = new Upgrader(plan);
 
                 upgrader.Execute(_scopeProvider, _migrationBuilder, _keyValueService, _logger);
             }
@@ -44,8 +44,6 @@ namespace Our.Umbraco.AuthU.Component
         }
 
         public void Terminate()
-        {
-
-        }
+        { }
     }
 }

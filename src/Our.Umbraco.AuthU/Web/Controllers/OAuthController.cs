@@ -2,11 +2,11 @@
 using System.Net;
 using System.Security.Claims;
 using System.Web;
-using System.Web.Http;
 using Our.Umbraco.AuthU.Extensions;
 using Our.Umbraco.AuthU.Models;
 using System.Linq;
 using Umbraco.Core;
+using System.Web.Http;
 
 namespace Our.Umbraco.AuthU.Web.Controllers
 {

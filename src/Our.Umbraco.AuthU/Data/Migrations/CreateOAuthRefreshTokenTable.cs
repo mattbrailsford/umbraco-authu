@@ -1,14 +1,14 @@
 ﻿using Our.Umbraco.AuthU.Models;
 using Umbraco.Core.Migrations;
 
-namespace Our.Umbraco.AuthU.Data.Migrations.UmbracoDbOAuthRefreshTokenStore
+namespace Our.Umbraco.AuthU.Data.Migrations
 {
     /// <summary>
     /// Simple migration to create the OAuthRefreshToken Table
     /// </summary>
-    internal class CreateAuthRefreshTokenStoreTable : MigrationBase
+    internal class CreateOAuthRefreshTokenTable : MigrationBase
     {
-        public CreateAuthRefreshTokenStoreTable(IMigrationContext context) : base(context)
+        public CreateOAuthRefreshTokenTable(IMigrationContext context) : base(context)
         { }
 
         public override void Migrate()
