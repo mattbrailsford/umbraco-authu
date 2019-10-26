@@ -71,7 +71,7 @@ namespace Our.Umbraco.AuthU.Web.Controllers
                     if (string.IsNullOrWhiteSpace(request.client_secret))
                         throw new OAuthResponseException(HttpStatusCode.Unauthorized, new { invalid_clientSecret = "A client_secret is required" });
 
-                    if (client.Secret != request.client_secret.GenerateHash())
+                    if (client.Secret != request.client_secret.GenerateOAuthHash())
                         throw new OAuthResponseException(HttpStatusCode.Unauthorized, new { invalid_clientSecret = "Invalid client_secret" });
                 }
 

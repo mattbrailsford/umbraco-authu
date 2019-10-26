@@ -1,9 +1,10 @@
-﻿using Umbraco.Core.Persistence;
+﻿using NPoco;
 using Umbraco.Core.Persistence.DatabaseAnnotations;
 
 namespace Our.Umbraco.AuthU.Models
 {
     [PrimaryKey("Id")]
+    [TableName("OAuthClient")]
     public class OAuthClient
     {
         [PrimaryKeyColumn]
