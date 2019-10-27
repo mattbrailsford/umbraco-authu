@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Web.Http;
+using System.Web.Routing;
 
 namespace Our.Umbraco.AuthU
 {
@@ -21,7 +22,7 @@ namespace Our.Umbraco.AuthU
                 return config;
             }
 
-            throw new Exception($"And endpoint for the realm \"{realm}\" has not yet been configured. Please call ConfigureEndpoint first.");
+            throw new Exception($"An endpoint for the realm \"{realm}\" has not yet been configured. Please call ConfigureEndpoint first.");
         }
 
         public static void ConfigureEndpoint(OAuthOptions config)
@@ -40,7 +41,7 @@ namespace Our.Umbraco.AuthU
             {
                 if (_contexts.TryAdd(realm, new OAuthContext(realm, options)))
                 {
-                    GlobalConfiguration.Configuration.Routes.MapHttpRoute(
+                    RouteTable.Routes.MapHttpRoute(
                         "OAuth_" + realm,
                         path.TrimStart('~', '/'),
                         new

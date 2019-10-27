@@ -6,7 +6,7 @@ namespace Our.Umbraco.AuthU.Extensions
 {
     public static class StringExtensions
     {
-        internal static string GenerateHash(this string input)
+        internal static string GenerateOAuthHash(this string input)
         {
             HashAlgorithm hashAlgorithm = new SHA256CryptoServiceProvider();
             var byteValue = Encoding.UTF8.GetBytes(input);

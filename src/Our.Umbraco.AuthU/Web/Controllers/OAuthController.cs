@@ -2,11 +2,11 @@
 using System.Net;
 using System.Security.Claims;
 using System.Web;
-using System.Web.Http;
 using Our.Umbraco.AuthU.Extensions;
 using Our.Umbraco.AuthU.Models;
 using System.Linq;
 using Umbraco.Core;
+using System.Web.Http;
 
 namespace Our.Umbraco.AuthU.Web.Controllers
 {
@@ -71,7 +71,7 @@ namespace Our.Umbraco.AuthU.Web.Controllers
                     if (string.IsNullOrWhiteSpace(request.client_secret))
                         throw new OAuthResponseException(HttpStatusCode.Unauthorized, new { invalid_clientSecret = "A client_secret is required" });
 
-                    if (client.Secret != request.client_secret.GenerateHash())
+                    if (client.Secret != request.client_secret.GenerateOAuthHash())
                         throw new OAuthResponseException(HttpStatusCode.Unauthorized, new { invalid_clientSecret = "Invalid client_secret" });
                 }
 

@@ -1,7 +1,7 @@
 image: Visual Studio 2017
 
 # version format
-version: 1.0.3.{build}
+version: 1.0.4.{build}
 
 # UMBRACO_PACKAGE_PRERELEASE_SUFFIX if a rtm release build this should be blank, otherwise if empty will default to alpha
 # example UMBRACO_PACKAGE_PRERELEASE_SUFFIX=beta
@@ -22,15 +22,6 @@ artifacts:
   - path: artifacts\*.zip
 
 deploy:
-    # MyGet Deployment for builds & releases
-  - provider: NuGet
-    server: https://www.myget.org/F/umbraco-authu/api/v2/package
-    symbol_server: https://www.myget.org/F/umbraco-authu/symbols/api/v2/package
-    api_key:
-      secure: gHDTL46KZcLzj6J8m//TJgaCOJCl9ixR//rXjO18HRlCsfPYYz7dU81u2D5zd+ZN
-    artifact: /.*\.nupkg/
-    on:
-      branch: develop
 
     # GitHub Deployment for releases
   - provider: GitHub
