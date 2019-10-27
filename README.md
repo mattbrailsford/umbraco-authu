@@ -7,8 +7,6 @@ AuthU is an add-on library to [Umbraco](https://github.com/umbraco/umbraco-cms) 
 
     PM> Install-Package Our.Umbraco.AuthU
 
-There's also a nightly Nuget feed: [`https://www.myget.org/F/umbraco-authu/api/v2`](https://www.myget.org/F/umbraco-authu/api/v2)
-
 ## Configuration
 In order to configure AuthU you will first of all need to create an Umbraco composer + compontent combination like so:
 ````csharp
