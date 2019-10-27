@@ -10,16 +10,29 @@ AuthU is an add-on library to [Umbraco](https://github.com/umbraco/umbraco-cms) 
 There's also a nightly Nuget feed: [`https://www.myget.org/F/umbraco-authu/api/v2`](https://www.myget.org/F/umbraco-authu/api/v2)
 
 ## Configuration
-AuthU is configured using the `OAuth.ConfigureEndpoint` helper inside an Umbraco `ApplicationEventHandler` like so:
-````csharp 
-    public class Boostrap : ApplicationEventHandler
+In order to configure AuthU you will first of all need to create an Umbraco composer + compontent combination like so:
+````csharp
+    public class AuthUConfigComponent : IComponent
     {
-        protected override void ApplicationStarted(UmbracoApplicationBase app, ApplicationContext ctx)
+        public void Initialize()
         {
-            OAuth.ConfigureEndpoint(...);
+            // Configuration goes here
         }
+
+        public void Terminate() { }
     }
+
+    public class AuthUConfigComposer : ComponentComposer<AuthUConfigComponent>
+    { }
 ````
+
+From within the `Initialize` method, you can then configure your endpoint(s) via the `OAuth.ConfigureEndpoint` helper like so:
+````csharp 
+    ...
+    OAuth.ConfigureEndpoint(...);
+    ...
+````
+
 ### Basic Configuration
 For the most basic OAuth implementation, the following minimal configuration is all that is needed:
 ````csharp 
