@@ -172,7 +172,7 @@ Example:
     "Hello Joe"
 
 ### Using javascript
-Presist and refreshing the token can be cumbersome. If you are using javascript you can use this small helper to handle and refreshing the token etc: [https://github.com/tobbbe/tauth](https://github.com/tobbbe/tauth)
+Presist and refreshing the token can be cumbersome. If you are using javascript you can use this small helper to handle and refreshing the token etc: [https://github.com/tobbbe/authur](https://github.com/tobbbe/authur)
 
 ## Contributing To This Project
 
