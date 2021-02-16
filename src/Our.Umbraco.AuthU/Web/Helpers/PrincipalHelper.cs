@@ -1,10 +1,10 @@
-﻿using Our.Umbraco.AuthU.Interfaces;
-using System.Linq;
+﻿using System.Linq;
 using System.Security.Claims;
+using Our.Umbraco.AuthU.Interfaces;
 
 namespace Our.Umbraco.AuthU.Web.Helpers
 {
-    internal static class PrincipalHelper
+    public static class PrincipalHelper
     {
         public static bool ValidatePrincipal(ClaimsPrincipal principal, string targetRealm, IOAuthUserService userService)
         {
