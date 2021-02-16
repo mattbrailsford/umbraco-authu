@@ -2,16 +2,16 @@
 {
     public partial class OAuth
     {
-        internal static readonly string DefaultRealm = "default";
+        public static readonly string DefaultRealm = "default";
 
-        internal static readonly string DefaultClientId = "default";
+        public static readonly string DefaultClientId = "default";
 
-        internal static readonly string DefaultEndpointPath = "/oauth/token";
+        public static readonly string DefaultEndpointPath = "/oauth/token";
 
-        internal static class ClaimTypes
+        public static class ClaimTypes
         {
-            internal static readonly string Realm = "realm";
-			internal static readonly string DeviceId = "deviceid";
-		}
+            public static readonly string Realm = "realm";
+            public static readonly string DeviceId = "deviceid";
+        }
     }
 }
