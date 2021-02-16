@@ -19,16 +19,8 @@ namespace Our.Umbraco.AuthU.Models
         [NullSetting(NullSetting = NullSettings.NotNull)]
         public string Name { get; set; }
 
-        [Column("SecurityLevel")]
         [NullSetting(NullSetting = NullSettings.NotNull)]
-        public int __SecurityLevel { get; set; }
-
-        [Ignore]
-        public SecurityLevel SecurityLevel
-        {
-            get { return (SecurityLevel)this.__SecurityLevel; }
-            set { this.__SecurityLevel = (int)value; }
-        }
+        public SecurityLevel SecurityLevel { get; set; }
 
         public bool Active { get; set; }
 
