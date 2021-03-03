@@ -274,6 +274,7 @@
     <Compile Include="Models\UmbracoKeyValue.cs" />
     <Compile Include="OAuthConstants.cs" />
     <Compile Include="OAuthContext.cs" />
+    <Compile Include="Services\UmbracoUsersRoleOAuthUserService.cs" />
     <Compile Include="Services\MembershipProviderOAuthUserService.cs" />
     <Compile Include="Web\Helpers\PrincipalHelper.cs" />
     <Compile Include="Web\Mvc\AddOAuthChallengeResult.cs" />
